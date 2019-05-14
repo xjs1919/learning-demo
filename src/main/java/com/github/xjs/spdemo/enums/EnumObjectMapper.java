@@ -3,7 +3,6 @@ package com.github.xjs.spdemo.enums;
 import java.io.IOException;
 import java.util.List;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -67,7 +66,7 @@ public class EnumObjectMapper extends ObjectMapper  {
 	
 	private static void serializeValue(JsonGenerator jgen, Object value) throws IOException {
 		Class valueClazz = value.getClass();
-		if(valueClazz == String.class || valueClazz==Char.class || valueClazz == char.class) {
+		if(valueClazz == String.class || valueClazz==Character.class || valueClazz == char.class) {
 			jgen.writeString(value.toString());
 		}else if(valueClazz == Boolean.class || valueClazz == boolean.class) {
 			jgen.writeBoolean(Boolean.valueOf(value.toString()));
@@ -90,7 +89,7 @@ public class EnumObjectMapper extends ObjectMapper  {
 	
 	public static <T extends BaseEnum> T getByValue(Class<T> enumClass, String source) {
 		Class valueClazz = EnumFactory.getValueTypeByClass(enumClass);
-		if(valueClazz == String.class || valueClazz==Char.class || valueClazz == char.class) {
+		if(valueClazz == String.class || valueClazz==Character.class || valueClazz == char.class) {
 			return (T)EnumFactory.getByValue(enumClass, source);
 		}else if(valueClazz == Boolean.class || valueClazz == boolean.class) {
 			return (T)EnumFactory.getByValue(enumClass, Boolean.valueOf(source));

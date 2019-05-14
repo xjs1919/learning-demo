@@ -17,5 +17,4 @@ import org.springframework.context.annotation.Import;
 public @interface EnumComponentScan {
     String[] value() default {};
     String[] basePackages() default {};
-
 }

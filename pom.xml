@@ -11,11 +11,9 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mysql.version>5.1.43</mysql.version>
 		<spring.version>4.2.7.RELEASE</spring.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
 		<fastjson.version>1.2.38</fastjson.version>
-		<druid.version>1.0.5</druid.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
 		<jedis.version>2.9.0</jedis.version>
 		<mybatis.version>3.3.0</mybatis.version>
@@ -31,6 +29,18 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.25.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.5.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -84,16 +94,6 @@
 			<version>${mybatis-spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
@@ -124,7 +124,7 @@
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
