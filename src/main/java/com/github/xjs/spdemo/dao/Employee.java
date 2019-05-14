@@ -1,5 +1,7 @@
 package com.github.xjs.spdemo.dao;
 
+import com.github.xjs.spdemo.enums.Gender;
+
 /**
  * @author xujs@inspur.com
  *
@@ -8,7 +10,7 @@ package com.github.xjs.spdemo.dao;
 public class Employee {
 	private int id;
 	private String name;
-	private int salary;
+	private Gender gender;
 	public int getId() {
 		return id;
 	}
@@ -21,10 +23,10 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getSalary() {
-		return salary;
+	public Gender getGender() {
+		return gender;
 	}
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 }
