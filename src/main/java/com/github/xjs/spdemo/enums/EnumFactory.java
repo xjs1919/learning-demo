@@ -24,6 +24,9 @@ public class EnumFactory {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void addAll(Class enumClazz) {
+		if(enumClazz == null) {
+			return;
+		}
 		init(enumClazz);
 	}
 	
@@ -47,6 +50,9 @@ public class EnumFactory {
 	 * */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <R extends BaseEnum<T>,T>  R getByValue(Class<R> enumClass, T value) {
+		if(enumClass == null) {
+			return null;
+		}
 		init(enumClass);
 		Set<BaseEnum> set = enumCache.get(enumClass);
 		for(BaseEnum<T> e : set) {
@@ -62,6 +68,9 @@ public class EnumFactory {
 	 * */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <R extends BaseEnum<T>, T> R getByDesc(Class<R> enumClass, String desc) {
+		if(enumClass == null) {
+			return null;
+		}
 		init(enumClass);
 		Set<BaseEnum> set = enumCache.get(enumClass);
 		for(BaseEnum<T> e : set) {
@@ -74,6 +83,9 @@ public class EnumFactory {
 
 	@SuppressWarnings("unchecked")
 	public static <R extends BaseEnum<V>, V> List<R> getAll(Class<R> clazz) {
+		if(clazz == null) {
+			return null;
+		}
         init(clazz);
         Set<R> set = (Set<R>) enumCache.get(clazz);
         if (set != null && set.size() > 0){
@@ -97,6 +109,9 @@ public class EnumFactory {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <V, R extends BaseEnum<V>> Class<R> getEnumTypeByAlias(String aliasClassName) {
+		if(aliasClassName == null || aliasClassName.length() <= 0) {
+			return null;
+		}
 		Set<Map.Entry<Class, Set<BaseEnum>>> entrySet = enumCache.entrySet();
 		for(Map.Entry<Class, Set<BaseEnum>> entry : entrySet) {
 			Class clazz = entry.getKey();
@@ -109,8 +124,11 @@ public class EnumFactory {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes"})
 	public static <V, R extends BaseEnum<V>> Class<V> getValueTypeByClass(Class<R> enumClsss) {
-			Set<BaseEnum> set = enumCache.get(enumClsss);
-			return (Class<V>)set.iterator().next().getValue().getClass();
+		if(enumClsss == null) {
+			return null;
+		}
+		Set<BaseEnum> set = enumCache.get(enumClsss);
+		return (Class<V>)set.iterator().next().getValue().getClass();
 	}
 	
 	private static <R> void init(Class<R> enumClass) {

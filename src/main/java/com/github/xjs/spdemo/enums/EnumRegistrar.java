@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -27,6 +29,7 @@ import org.springframework.util.StringUtils;
  */
 public class EnumRegistrar implements  ImportBeanDefinitionRegistrar {
 	
+	private static Logger log = LoggerFactory.getLogger(EnumRegistrar.class);
 	private static final String RESOURCE_PATTERN = "**/*.class";
 	private static final String CLASSPATH_URL_PREFIX = "classpath:";
 	
@@ -40,8 +43,6 @@ public class EnumRegistrar implements  ImportBeanDefinitionRegistrar {
         if (ObjectUtils.isEmpty(basePackages)) {
             basePackages = new String[] {ClassUtils.getPackageName(importingClassMetadata.getClassName())};
         }
-//        List<TypeFilter> includeFilters = new ArrayList<TypeFilter>(1);
-//        includeFilters.add(new EnumTypeFilter());
         List<Class<?>> candidates = scanPackages(basePackages, null, null);
         if (candidates.isEmpty()) {
             return;
@@ -55,9 +56,12 @@ public class EnumRegistrar implements  ImportBeanDefinitionRegistrar {
         List<Class<?>> candidates = new ArrayList<Class<?>>();
         for (String pkg : basePackages) {
             try {
-                candidates.addAll(findCandidateClasses(pkg, includeFilters, excludeFilters));
+            	List<Class<?>> list = findCandidateClasses(pkg, includeFilters, excludeFilters);
+            	if(list != null) {
+            		 candidates.addAll(list);
+            	}
             } catch (IOException e) {
-                System.out.println("扫描包["+pkg+"]时出现异常");
+            	log.error("扫描包["+pkg+"]时出现异常",e);
                 continue;
             }
         }
@@ -74,7 +78,7 @@ public class EnumRegistrar implements  ImportBeanDefinitionRegistrar {
             Class<?> candidateClass = transform(reader.getClassMetadata().getClassName());
             if (candidateClass != null && BaseEnum.class.isAssignableFrom(candidateClass) && candidateClass != BaseEnum.class) {
                 candidates.add(candidateClass);
-                System.out.println("扫描到Enum类："+candidateClass.getSimpleName());
+                log.info("扫描到Enum类：{}",candidateClass.getSimpleName());
             }
         }
         return candidates;
@@ -85,7 +89,7 @@ public class EnumRegistrar implements  ImportBeanDefinitionRegistrar {
         try {
             clazz = ClassUtils.forName(className, this.getClass().getClassLoader());
         } catch (ClassNotFoundException e) {
-        	System.out.println("未找到类"+className);
+        	log.info("未找到类:{}", className);
         }
         return clazz;
     }
