@@ -16,6 +16,7 @@ import com.github.xjs.spdemo.enums.EnumObjectMapper;
  * @author xujs@inspur.com
  *
  * @date 2019年5月14日 下午2:44:47<br/>
+ * 参考：https://blog.csdn.net/u014044812/article/details/78258730 
  */
 @Alias("EnumHandler")
 public class EnumHandler<R extends BaseEnum<V>,V> extends BaseTypeHandler<R> {

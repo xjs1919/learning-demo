@@ -49,6 +49,7 @@ import com.github.xjs.spdemo.enums.EnumFactory;
  * @author xujs@inspur.com
  *
  * @date 2019年5月14日 下午2:50:35<br/>
+ * 参考：https://blog.csdn.net/goldenfish1919/article/details/52806659
  */
 public class EnumSqlSessionFactory implements FactoryBean<SqlSessionFactory>, InitializingBean, ApplicationListener<ApplicationEvent> {
 
