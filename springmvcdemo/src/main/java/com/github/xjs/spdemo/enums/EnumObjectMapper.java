@@ -60,7 +60,7 @@ public class EnumObjectMapper extends ObjectMapper  {
 				JsonNode node = jp.getCodec().readTree(jp); 
 				Class enumClass = EnumFactory.getEnumTypeByAlias(name);
 				String source= node.asText();
-				return getByValue(enumClass, source);
+				return EnumFactory.convertByStringValue(enumClass, source);
 		}  
 	} 
 	
@@ -84,29 +84,6 @@ public class EnumObjectMapper extends ObjectMapper  {
 			jgen.writeNumber(Short.valueOf(value.toString()));
 		} else {
 			jgen.writeString(value.toString());
-		}
-	}
-	
-	public static <T extends BaseEnum> T getByValue(Class<T> enumClass, String source) {
-		Class valueClazz = EnumFactory.getValueTypeByClass(enumClass);
-		if(valueClazz == String.class || valueClazz==Character.class || valueClazz == char.class) {
-			return (T)EnumFactory.getByValue(enumClass, source);
-		}else if(valueClazz == Boolean.class || valueClazz == boolean.class) {
-			return (T)EnumFactory.getByValue(enumClass, Boolean.valueOf(source));
-		}else if(valueClazz == Integer.class || valueClazz == int.class ) {
-			return (T)EnumFactory.getByValue(enumClass, Integer.valueOf(source));
-		}else if(valueClazz == Long.class || valueClazz == long.class ) {
-			return (T)EnumFactory.getByValue(enumClass, Long.valueOf(source));
-		} else if(valueClazz == Double.class || valueClazz == double.class) {
-			return (T)EnumFactory.getByValue(enumClass, Double.valueOf(source));
-		} else if(valueClazz == Float.class || valueClazz == float.class) {
-			return (T)EnumFactory.getByValue(enumClass, Float.valueOf(source));
-		} else if(valueClazz == Byte.class || valueClazz == byte.class ) {
-			return (T)EnumFactory.getByValue(enumClass, Byte.valueOf(source));
-		} else if( valueClazz == Short.class || valueClazz == short.class) {
-			return (T)EnumFactory.getByValue(enumClass, Short.valueOf(source));
-		} else {
-			return (T)EnumFactory.getByValue(enumClass, source);
 		}
 	}
 }

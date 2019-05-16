@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @EnumComponentScan(basePackages="com.github.xjs.spdemo.enums")
 @Configuration
-public class EnumConfig {
+public class EnumScanConfig {
 
 }

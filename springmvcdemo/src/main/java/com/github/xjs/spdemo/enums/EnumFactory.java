@@ -131,6 +131,33 @@ public class EnumFactory {
 		return (Class<V>)set.iterator().next().getValue().getClass();
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static <T extends BaseEnum> T convertByStringValue(Class<T> enumClass, String source) {
+		if(enumClass == null || source == null || source.length() <= 0){
+			return null;
+		}
+		Class valueClazz = EnumFactory.getValueTypeByClass(enumClass);
+		if(valueClazz == String.class || valueClazz==Character.class || valueClazz == char.class) {
+			return (T)EnumFactory.getByValue(enumClass, source);
+		}else if(valueClazz == Boolean.class || valueClazz == boolean.class) {
+			return (T)EnumFactory.getByValue(enumClass, Boolean.valueOf(source));
+		}else if(valueClazz == Integer.class || valueClazz == int.class ) {
+			return (T)EnumFactory.getByValue(enumClass, Integer.valueOf(source));
+		}else if(valueClazz == Long.class || valueClazz == long.class ) {
+			return (T)EnumFactory.getByValue(enumClass, Long.valueOf(source));
+		} else if(valueClazz == Double.class || valueClazz == double.class) {
+			return (T)EnumFactory.getByValue(enumClass, Double.valueOf(source));
+		} else if(valueClazz == Float.class || valueClazz == float.class) {
+			return (T)EnumFactory.getByValue(enumClass, Float.valueOf(source));
+		} else if(valueClazz == Byte.class || valueClazz == byte.class ) {
+			return (T)EnumFactory.getByValue(enumClass, Byte.valueOf(source));
+		} else if( valueClazz == Short.class || valueClazz == short.class) {
+			return (T)EnumFactory.getByValue(enumClass, Short.valueOf(source));
+		} else {
+			return (T)EnumFactory.getByValue(enumClass, source);
+		}
+	}
+	
 	private static <R> void init(Class<R> enumClass) {
 		//说明已经初始化过了
 		if(enumCache.get(enumClass) != null){

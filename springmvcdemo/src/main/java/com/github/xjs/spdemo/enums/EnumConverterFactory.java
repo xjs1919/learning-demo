@@ -27,7 +27,7 @@ public class EnumConverterFactory  implements ConverterFactory<String, BaseEnum>
 			if (source.length() == 0) {
 				return null;
 			}
-			return (T)EnumObjectMapper.getByValue(this.enumClass, source);
+			return (T)EnumFactory.convertByStringValue(this.enumClass, source);
 		}
 	}
 }

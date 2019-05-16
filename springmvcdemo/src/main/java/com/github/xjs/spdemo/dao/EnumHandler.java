@@ -10,7 +10,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
 import com.github.xjs.spdemo.enums.BaseEnum;
-import com.github.xjs.spdemo.enums.EnumObjectMapper;
+import com.github.xjs.spdemo.enums.EnumFactory;
 
 /**
  * @author xujs@inspur.com
@@ -73,6 +73,6 @@ public class EnumHandler<R extends BaseEnum<V>,V> extends BaseTypeHandler<R> {
 	}
 	
 	private R toEnum(String value){
-		return EnumObjectMapper.getByValue(type, value);
+		return EnumFactory.convertByStringValue(type, value);
 	}
 }
