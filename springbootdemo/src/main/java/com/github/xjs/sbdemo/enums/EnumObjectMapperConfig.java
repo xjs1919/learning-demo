@@ -1,26 +1,18 @@
 package com.github.xjs.sbdemo.enums;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.TimeZone;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -34,41 +26,30 @@ public class EnumObjectMapperConfig {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
-	@Primary
-	@ConditionalOnMissingBean(ObjectMapper.class)
-	public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
-		ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		// 允许出现特殊字符和转义符
-		objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-		// 允许出现单引号
-		objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-		// 设置日期格式
-		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-		// 设置时区
-		objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-		// 获取所有的枚举类
-		List enumClasses = EnumFactory.getAllEnumClass();
-		// 添加Serializer
+	public SimpleModule serializeEnumModule() {
 		SimpleModule module = new SimpleModule();
 		EnumSerializer enumSerializer = new EnumSerializer();
-		for (Object enumClass : enumClasses) {
-			Class clazz = (Class) enumClass;
-			module.addSerializer(clazz, enumSerializer);
+		List enumClasses =EnumFactory.getAllEnumClass();
+		for(Object enumClass : enumClasses) {
+			Class clazz = (Class)enumClass;
+			module.addSerializer(clazz,enumSerializer);  
 		}
-		objectMapper.registerModule(module);
-		// 添加Deserializer
-		SimpleModule module2 = new SimpleModule();
-		EnumDeserializer enumDeserializer = new EnumDeserializer();
-		for (Object enumClass : enumClasses) {
-			Class clazz = (Class) enumClass;
-			module2.addDeserializer(clazz, enumDeserializer);
-		}
-		objectMapper.registerModule(module2);
-		return objectMapper;
+		return module;
 	}
-
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Bean
+	public SimpleModule deserializeEnumModule() {
+		SimpleModule module = new SimpleModule();
+		EnumDeserializer enumDeserializer = new EnumDeserializer();
+		List enumClasses =EnumFactory.getAllEnumClass();
+		for(Object enumClass : enumClasses) {
+			Class clazz = (Class)enumClass;
+			module.addDeserializer(clazz, enumDeserializer);  
+		}
+		return module;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	private static class EnumSerializer extends JsonSerializer<BaseEnum> {
 		@Override
