@@ -1,0 +1,25 @@
+<script src="/jquery.min.js"></script>
+<form method="post" action="user_center/login"> 
+	username:<input type="text" name="username" id="username" /><br/>
+	password:<input type="text" name="password" id="password" /><br/>
+	<span id="errmsg"></span><br/>
+	<input type="hidden" name="redirect_url" id="redirect_url"  />
+	<input type="submit" value="submit"/>
+</form>
+<script>
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r != null) return unescape(r[2]);
+	return null;
+};
+$("#redirect_url").val(getQueryString("redir_url"));
+var errmsg  = getQueryString("errmsg");
+if(errmsg){
+	$("#errmsg").show();
+	$("#errmsg").text(errmsg);
+}else{
+	$("#errmsg").hide();
+	$("#errmsg").text("");
+}
+</script>
