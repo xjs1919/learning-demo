@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,32 +24,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/site2")
 public class MainController{
 	
+	private static final String USER_CENTER_LOGIN_URL = "http://www.usercenter.com/user_center/login?redir_url=%s";
+	private static final String USER_CENTER_GET_TOKEN_URL = "http://www.usercenter.com/user_center/getByToken?token=%s";
+	private static final String COOKIE_NAME = "site2_tk";
+	private static final String PARAM_NAME = "user_center_tk";
+	
 	@GetMapping("/main")
-	public String main(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String main(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		String tk = getFromCookie(request);
 		if(tk != null) {
-			return "redirect:/main.html";
+			String username = getFromUserCenter(tk);
+			if(username != null) {
+				model.addAttribute("username", username);
+				return "main";
+			}else {
+				//如果失效，重新登录
+				String url = getFullUrl(request);
+				return "redirect:"+String.format(USER_CENTER_LOGIN_URL, URLEncoder.encode(url, "UTF-8"));
+			}
 		}else {
 			tk = getFromParam(request);
 			if(tk != null) {
 				String username = getFromUserCenter(tk);
 				if(username != null) {
-					Cookie cookie = new Cookie("user_center_tk", tk);
+					Cookie cookie = new Cookie(COOKIE_NAME, tk);
+					cookie.setMaxAge(Integer.MAX_VALUE);
 					response.addCookie(cookie);
-					return "redirect:/main.html";
+					model.addAttribute("username", username);
+					return "main";
 				}else {//说明token已经过期，重新登录
-					String url = "http://www.site2.com/site2/main";
-					return "redirect:http://www.usercenter.com/user_center/login?redir_url="+URLEncoder.encode(url, "UTF-8");
+					String url = getFullUrl(request);
+					return "redirect:"+String.format(USER_CENTER_LOGIN_URL, URLEncoder.encode(url, "UTF-8"));
 				}
 			}else {
-				String url = "http://www.site2.com/site2/main";
-				return "redirect:http://www.usercenter.com/user_center/login?redir_url="+URLEncoder.encode(url, "UTF-8");
+				String url = getFullUrl(request);
+				return "redirect:"+String.format(USER_CENTER_LOGIN_URL, URLEncoder.encode(url, "UTF-8"));
 			}
 		}
 	}
 	
 	private String getFromUserCenter(String tk) {
-		String url = "http://www.usercenter.com/user_center/getByToken?token="+tk;
+		String url = String.format(USER_CENTER_GET_TOKEN_URL, tk);
 		try {
 			HttpURLConnection conn =	(HttpURLConnection)((new URL(url).openConnection()));
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -67,8 +83,18 @@ public class MainController{
 		return null;
 	}
 
+	private String getFullUrl(HttpServletRequest request) {
+		String reqUrl = request.getRequestURL().toString();
+		String query = request.getQueryString();
+		String url = reqUrl;
+		if (query != null && query.length() > 0) {
+			url = url + "?" + query;
+		}
+		return url;
+	}
+	
 	private String getFromParam(HttpServletRequest request) {
-		return request.getParameter("user_center_tk");
+		return request.getParameter(PARAM_NAME);
 	}
 	
 	private String getFromCookie(HttpServletRequest request) {
@@ -78,7 +104,7 @@ public class MainController{
 		 }else {
 			 for(Cookie cookie : cookies) {
 				 String name = cookie.getName();
-				 if(name.equals("user_center_tk")) {
+				 if(name.equals(COOKIE_NAME)) {
 					 return cookie.getValue();
 				 }
 			 }

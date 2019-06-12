@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>site2主页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<span th:text="${username}"></span>，这是site2的主页面<br/>
+<input type="button" onclick="goToSite1()" value="go to site1"/>
+<script>
+function goToSite1(){
+	window.location.href="http://www.site1.com/site1/main";
+}
+</script>
+</html>

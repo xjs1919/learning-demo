@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>user-center主页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" th:src="@{/jquery.min.js}"></script>
+</head>
+<body>
+<form method="post" action="login"> 
+	用户名:<input type="text" name="username" id="username" /><br/>
+	密码:<input type="text" name="password" id="password" /><br/>
+	<span th:if="${errmsg != null}"><font color='red'><span th:text="${errmsg}"></span></font><br/></span>
+	<input type="hidden" name="redirect_url" id="redirect_url"  th:value="${redir_url}" />
+	<input type="submit" value="登录"/>
+</form>
+</body>
+</html>
