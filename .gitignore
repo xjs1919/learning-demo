@@ -8,3 +8,5 @@
 /springmvcdemo/target
 /springmvcdemo/.classpath
 /springmvcdemo/.gitignore
+/sso/*.project
+/sso/*
