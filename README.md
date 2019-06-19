@@ -7,3 +7,4 @@
 * springmvcdemo:  [自定义枚举集成SprintMVC](https://mp.weixin.qq.com/s/xoM8WPJfQJva58vZV0CeJw)
 * springbootdemo： [自定义枚举集成SpringBoot](https://mp.weixin.qq.com/s/KD_L68RNjOTy3QwMG19NPw)
 * order_auto_confirm： [订单30分钟不支付自动取消](https://mp.weixin.qq.com/s/8BCGHIXOppztvijD-JRakw)
+* sso： [单点登录系统SSO是如何实现的？](https://mp.weixin.qq.com/s/dMfi7waQjhp4PFi4fxl_MQ)
