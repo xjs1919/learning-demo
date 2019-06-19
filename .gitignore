@@ -10,3 +10,4 @@
 /springmvcdemo/.gitignore
 /sso/*.project
 /sso/*
+/bloomfilter/.mvn
