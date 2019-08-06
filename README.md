@@ -9,3 +9,4 @@
 * order_auto_confirm： [订单30分钟不支付自动取消](https://mp.weixin.qq.com/s/8BCGHIXOppztvijD-JRakw)
 * sso： [单点登录系统SSO是如何实现的？](https://mp.weixin.qq.com/s/dMfi7waQjhp4PFi4fxl_MQ)
 * bloomfilter： [缓存穿透与布隆过滤器BloomFilter那些事](https://mp.weixin.qq.com/s/2Ir3HEbGyQBCmfmtDyzYsg)
+* crosdemo： [Ajax跨域详解](https://mp.weixin.qq.com/s/lUZIr2TgNpoOj0mFDWZ1Qg)
