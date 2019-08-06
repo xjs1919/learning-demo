@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.4.1.js"></script>
+</head>
+<body>
+
+<button onclick="get1()" >get1()</button><br/><br/>
+<button onclick="jsonp()" >jsonp()</button><br/><br/>
+<button onclick="postJson()" >postJson()</button><br/><br/>
+<button onclick="getCookie()" >getCookie()</button><br/><br/>
+<button onclick="getHeader()" >getHeader()</button><br/><br/>
+<script>
+    var baseUrl = "http://localhost:8080/test";
+    //var baseUrl = "http://bb.com/test";
+    //var baseUrl = "/ajaxserver";
+    function get1(){
+        $.getJSON(baseUrl + "/get1").then(function(result){
+            console.log(result)
+        });
+    }
+    function jsonp(){
+        $.ajax({
+                url: baseUrl + "/get1",
+                dataType: "jsonp",
+                success: function(result ){
+                    console.log(result)
+                }
+        })
+    }
+    
+    function  postJson() {
+        $.ajax({
+            url: baseUrl + "/postJson",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify({name:"xjs"}),
+            success: function(result){
+                console.log(result)
+            }
+        })
+    }
+
+    function getCookie() {
+        $.ajax({
+            url: baseUrl + "/getCookie",
+            xhrFields:{
+                withCredentials: true
+            },
+            success:function (result) {
+                console.log(result)
+            }
+        })
+    }
+    function getHeader() {
+        $.ajax({
+            url: baseUrl + "/getHeader",
+            headers:{
+                "x-header1" : "header1",
+            },
+            success:function (result) {
+                console.log(result)
+            }
+        });
+    }
+</script>
+</body>
+</html>
