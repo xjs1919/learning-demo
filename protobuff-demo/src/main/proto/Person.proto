@@ -1,0 +1,8 @@
+syntax = "proto3";
+option java_package = "com.github.xjs.protobuffdemo";
+option java_outer_classname = "PersonProto";
+
+message Person{
+    string name = 1;
+    int32 age = 2;
+}
