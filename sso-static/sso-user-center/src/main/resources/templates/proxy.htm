@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>proxy</title>
+</head>
+<body>
+<input type="hidden" th:value="${user_center_tk}" id="user_center_tk"/>
+<input type="hidden" th:value="${redir_url}" id="redir_url"/>
+<script>
+function createProxyUrl(url){
+    var pos = url.indexOf("://");
+    var protocal = url.substring(0, pos+3);
+    var left = url.substring(pos+3);
+    var root = left.indexOf("/")
+    var hostPort = "";
+    if(root < 0){
+        hostPort =left;
+    }else{
+        hostPort =left.substring(0, left.indexOf("/"));
+    }
+    return protocal + hostPort + "/proxy.html";
+}
+var iframe = document.createElement("iframe");
+var redirectUrl = document.getElementById("redir_url").value;
+var user_center_tk =  document.getElementById("user_center_tk").value;
+var proxyUrl = createProxyUrl(redirectUrl);
+iframe.src = proxyUrl+"?user_center_tk=" + user_center_tk;
+document.getElementsByTagName("body")[0].appendChild(iframe);
+iframe.onload=function(){
+    window.location.href = redirectUrl;
+}
+</script>
+
+</body>
+</html>

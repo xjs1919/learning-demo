@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>site1主页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+欢迎你：<span id="username"></span>，这是site1的主页面<br/>
+<input type="button" onclick="goToSite2()" value="go to site2"/>
+</body>
+<script>
+$().ready(function(){
+    getUserInfo();
+});
+
+function getUserInfo(){
+    $.ajax({
+        url:"/site1/getUserInfo",
+        success: function (data) {
+            if(data.errcode == 0){
+                var username = data.data;
+                $("#username").html(username);
+            }else if(data.errcode == 302){
+                window.location.href=data.data;
+            }else{
+                alert(data.msg);
+            }
+        }
+    });
+}
+
+function goToSite2(){
+	window.location.href="http://www.site2.com/main.html";
+}
+</script>
+</html>

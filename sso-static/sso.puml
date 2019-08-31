@@ -1,0 +1,20 @@
+@startuml
+用户 -> a.com: 访问a的需要登陆的url
+a.com -> 用户中心: 拿到a的cookie,调UC接口验证
+a.com <-- 用户中心: 验证通过
+a.com -> a.com: 业务处理
+用户 <-- a.com: 返回业务数据
+
+a.com -> 用户中心: 拿不到或验证失败，重定向到UC，传html的url
+用户中心 -> 用户中心: 拿到uc的cookie,进入proxy页面
+用户中心 -> 用户中心: proxy页面加载iframe，src=a.com上一个proxy网页
+用户 <- 用户中心: iframe加载完成，重定向回a.com
+
+用户中心 -> 用户中心: 拿不到uc的cookie，展示登录页面
+用户 -> 用户中心: 输入用户名密码登录
+用户中心 -> 用户中心: 做登录，写uc的cookie，进入proxy页面
+用户中心 -> 用户中心: proxy页面加载iframe，src=a.com上一个proxy网页
+用户 <- 用户中心: iframe加载完成，重定向回a.com
+
+
+@enduml

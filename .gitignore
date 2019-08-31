@@ -11,3 +11,8 @@
 /sso/*.project
 /sso/*
 /bloomfilter/.mvn
+/sso-static/sso-site1/target
+/sso-static/sso-site2/target
+/sso-static/sso-user-center/target
+/sso-static/*.iml
+*.iml
