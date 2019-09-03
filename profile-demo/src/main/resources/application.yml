@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ${project.groupId}:${project.artifactId}
+  profiles:
+    #以下两种方式等价
+    active: ${package.environment}
+    #active: @package.environment@
