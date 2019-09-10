@@ -10,3 +10,6 @@
 * sso： [单点登录系统SSO是如何实现的？](https://mp.weixin.qq.com/s/dMfi7waQjhp4PFi4fxl_MQ)
 * bloomfilter： [缓存穿透与布隆过滤器BloomFilter那些事](https://mp.weixin.qq.com/s/2Ir3HEbGyQBCmfmtDyzYsg)
 * crosdemo： [Ajax跨域详解](https://mp.weixin.qq.com/s/lUZIr2TgNpoOj0mFDWZ1Qg)
+* protobuff-demo：[idea集成protobuf](https://blog.csdn.net/goldenfish1919/article/details/100097864)
+* sso-static：[前后端分离如何做SSO单点登录？](https://mp.weixin.qq.com/s/uncSGOtTDknqbnezlC-ccg)
+* profile-demo：[SpringBoot多Profile如何优雅打包？](https://mp.weixin.qq.com/s/P5xu8A1CudtW0U9wLgxS_g)
