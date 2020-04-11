@@ -13,3 +13,4 @@
 * protobuff-demo：[idea集成protobuf](https://blog.csdn.net/goldenfish1919/article/details/100097864)
 * sso-static：[前后端分离如何做SSO单点登录？](https://mp.weixin.qq.com/s/uncSGOtTDknqbnezlC-ccg)
 * profile-demo：[SpringBoot多Profile如何优雅打包？](https://mp.weixin.qq.com/s/P5xu8A1CudtW0U9wLgxS_g)
+* mockbatis-demo: [mockbatis-spring-boot-starter自己造轮子]()
