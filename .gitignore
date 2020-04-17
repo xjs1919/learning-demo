@@ -16,3 +16,4 @@
 /sso-static/sso-user-center/target
 /sso-static/*.iml
 *.iml
+target
