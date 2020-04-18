@@ -14,7 +14,12 @@ import org.springframework.core.env.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+/**
+ * 参考文档：<br/>
+ * <a href="https://www.cnblogs.com/feixy/p/5870233.html">Spring框架学习--自定义Scope类型</a><br/>
+ * <a href="https://www.jianshu.com/p/188013dd3d02">@RefreshScope那些事</a>
+ *
+ * */
 @Configuration
 public class ConfigRefreshAutoConfiguration implements EnvironmentAware, BeanDefinitionRegistryPostProcessor,
         ApplicationListener<RefreshEvent> {
