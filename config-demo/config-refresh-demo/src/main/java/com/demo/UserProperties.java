@@ -2,9 +2,11 @@ package com.demo;
 
 import com.github.xjs.config.anno.RefreshScope;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "user")
 @RefreshScope
+@Component
 public class UserProperties {
 
     private String username;
