@@ -15,5 +15,6 @@
 * profile-demo：[SpringBoot多Profile如何优雅打包？](https://mp.weixin.qq.com/s/P5xu8A1CudtW0U9wLgxS_g)
 * mockbatis-demo: [mockbatis-spring-boot-starter自己造轮子](https://mp.weixin.qq.com/s/um35oCf3IiYgs9XLUpDH3Q)
 * import-demo: [Spring的@Import注解详解](https://mp.weixin.qq.com/s/Tq9e1D2Ok3Qaz9-3r_5sUg)
-* async-demo: [Spring的@EnableAsync与@Async详解](--)
+* async-demo: [Spring的@EnableAsync与@Async详解](https://mp.weixin.qq.com/s/DRsfSdpkKQ-ulakNeYnKQw)
+* schedule-demo: [Spring的@EnableScheduling与@Scheduled使用详解](https://mp.weixin.qq.com/s/lyECql3G9gD1VIrhvZUd6g)
 * event-demo: [Spring的事件Event详解](--)
