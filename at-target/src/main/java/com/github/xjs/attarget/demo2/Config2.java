@@ -4,13 +4,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @Configuration
 public class Config2 {
 
     @Bean
     public Advice2 advice2(){
         return new Advice2();
+    }
+
+    @Bean
+    public String hello(){
+        return "hello";
     }
 
     @Bean
