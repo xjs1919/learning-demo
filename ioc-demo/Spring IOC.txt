@@ -1,0 +1,133 @@
+在Spring中如何实例化一个Bean？
+（1）构造函数
+```xml
+<bean id="exampleBean" class="examples.ExampleBean"/>
+```
+（2）静态工厂
+```xml
+<bean id="clientService"
+    class="examples.ClientService"
+    factory-method="createInstance"/>
+```
+```java
+public class ClientService {
+    private static ClientService clientService = new ClientService();
+    private ClientService() {}
+    public static ClientService createInstance() {
+        return clientService;
+    }
+}
+```
+（3）实例工厂
+```xml
+<!-- the factory bean, which contains a method called createInstance() -->
+<bean id="serviceLocator" class="examples.DefaultServiceLocator">
+    <!-- inject any dependencies required by this locator bean -->
+</bean>
+<!-- the bean to be created via the factory bean -->
+<bean id="clientService"
+    factory-bean="serviceLocator"
+    factory-method="createClientServiceInstance"/>
+```
+```java
+public class DefaultServiceLocator {
+    private static ClientService clientService = new ClientServiceImpl();
+    public ClientService createClientServiceInstance() {
+        return clientService;
+    }
+}
+```
+如何获取这些bean的真正的类型呢：可以使用beanFactory.getType().
+```java
+public static void main(String[] args) {
+	AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DemoApp.class);
+	System.out.println(ctx.getType("serviceFactory"));
+	System.out.println(ctx.getType("randomService"));
+}
+```
+Spring依赖注入
+（1）构造函数注入
+（2）setter注入
+
+构造函数注入：
+```java
+public class SimpleMovieLister {
+    // the SimpleMovieLister has a dependency on a MovieFinder
+    private MovieFinder movieFinder;
+    // a constructor so that the Spring container can inject a MovieFinder
+    public SimpleMovieLister(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+    // business logic that actually uses the injected MovieFinder is omitted...
+}
+```
+构造函数的参数解析：
+（1）bean类型可以用ref
+```java
+public class ThingOne {
+    public ThingOne(ThingTwo thingTwo, ThingThree thingThree) {
+    }
+}
+<beans>
+    <bean id="beanOne" class="x.y.ThingOne">
+        <constructor-arg ref="beanTwo"/>
+        <constructor-arg ref="beanThree"/>
+    </bean>
+    <bean id="beanTwo" class="x.y.ThingTwo"/>
+    <bean id="beanThree" class="x.y.ThingThree"/>
+</beans>
+```
+（2）基本类型可以用type
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+	<constructor-arg type="int" value="7500000"/>
+	<constructor-arg type="java.lang.String" value="42"/>
+</bean>
+```
+（3）还可以用参数的index（从0开始）
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+	<constructor-arg index="0" value="7500000"/>
+	<constructor-arg index="1" value="42"/>
+</bean>
+```
+（4）还可以用参数的名字name
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg name="years" value="7500000"/>
+    <constructor-arg name="ultimateAnswer" value="42"/>
+</bean>
+```
+在使用参数的名字的时候，需要在编译的时候添加调试信息（这个后面会单独出一个文章来讲解下）。
+（5）还可以使用ConstructorProperties，如果编译的时候没有调试信息
+```java
+ @ConstructorProperties({"years", "ultimateAnswer"})
+public ExampleBean(int years, String ultimateAnswer) {
+	this.years = years;
+	this.ultimateAnswer = ultimateAnswer;
+}
+```
+
+Setter方法注入
+（1）只需要给要注入的bean添加set方法即可
+```java
+public class SimpleMovieLister {
+    // the SimpleMovieLister has a dependency on the MovieFinder
+    private MovieFinder movieFinder;
+    // a setter method so that the Spring container can inject a MovieFinder
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+    // business logic that actually uses the injected MovieFinder is omitted...
+}
+```
+
+到底是选用构造函数注入还是setter注入？
+一般不能为空必须要注入的，使用构造函数注入，允许为空可以不注入的选用setter注入。
+
+
+
+
+
+
+

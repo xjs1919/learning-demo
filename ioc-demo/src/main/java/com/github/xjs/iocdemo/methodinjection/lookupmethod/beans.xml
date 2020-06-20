@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- a stateful bean deployed as a prototype (non-singleton) -->
+    <bean id="myCommand" class="com.github.xjs.iocdemo.methodinjection.lookupmethod.Command" scope="prototype">
+        <!-- inject dependencies here as required -->
+    </bean>
+
+    <!-- commandProcessor uses statefulCommandHelper -->
+    <bean id="commandManager" class="com.github.xjs.iocdemo.methodinjection.lookupmethod.CommandManager" scope="singleton">
+        <lookup-method name="createCommand" bean="myCommand"/>
+    </bean>
+
+</beans>

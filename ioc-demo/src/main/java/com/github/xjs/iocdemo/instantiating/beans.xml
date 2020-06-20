@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--静态工厂-->
+    <bean id="serviceFactory"
+          class="com.github.xjs.iocdemo.instantiating.ServiceFactory"
+          factory-method="createInstance"/>
+
+    <!--实例工厂-->
+    <!--为什么要定义serviceFactory2？因为serviceFactory实际是Service1，并不是ServiceFactory的一个实例-->
+    <bean id="serviceFactory2" class="com.github.xjs.iocdemo.instantiating.ServiceFactory"/>
+    <bean id="randomService"
+        factory-bean="serviceFactory2"
+        factory-method="createService"/>
+
+</beans>
