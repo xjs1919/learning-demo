@@ -9,7 +9,8 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class DemoAdvice {
 
-    @Pointcut("@target(org.springframework.web.bind.annotation.RestController)")
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
+    //@Pointcut("@target(org.springframework.web.bind.annotation.RestController)")    	
     public void pointCut(){
     }
 

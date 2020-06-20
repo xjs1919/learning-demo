@@ -10,11 +10,12 @@ import org.aspectj.lang.annotation.Pointcut;
 public class Advice2 {
 
     @Pointcut("@within(com.github.xjs.attarget.demo2.MyAnno)")
+    //@Pointcut("@target(com.github.xjs.attarget.demo2.MyAnno)")
     public void pointCut(){
     }
 
     @Before("pointCut()")
     public void before(){
-        log.info("---------before-------");
+        System.out.println("---------before-------");
     }
 }
