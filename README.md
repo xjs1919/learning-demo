@@ -20,3 +20,4 @@
 * event-demo: [Spring的事件Event详解](https://mp.weixin.qq.com/s/72EfBAw1TAv_rU_IVHbZTQ)
 * configuration-demo: [Spring的@Bean只能放在@Configuration里面吗？](https://mp.weixin.qq.com/s/zQFbmKfSMw08F3x0iCgHUg)
 * at-target: [spring aop的@target与@within的真正区别到底是什么？](https://mp.weixin.qq.com/s/Lui1xVSI19q2w7XkUCAJiA)
+* ioc-demo： [Spring IOC的@Autowired、@Resource、@Inject的区别](https://mp.weixin.qq.com/s/6aPSgW-WAQUS-u5X4pJsDg)
