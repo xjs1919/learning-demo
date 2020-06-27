@@ -5,7 +5,7 @@ public class Son extends Father {
 
     @Override
     public void fun1(){
-        System.out.println("fun1");
+        System.out.println("son fun1");
     }
 
 }

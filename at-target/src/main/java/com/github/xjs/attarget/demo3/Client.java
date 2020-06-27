@@ -10,27 +10,27 @@ public class Client {
         father.fun1();
         /**
          *  ---------@within @AnnoFather-------
-         *  ---------@target @AnnoFather-------
-         *  fun1
+         * ---------@target @AnnoFather-------
+         * father fun1
          * */
         father.fun2();
         /**
          * ---------@within @AnnoFather-------
          * ---------@target @AnnoFather-------
-         * fun2
+         * father fun2
          * */
         Son son = (Son)ctx.getBean("son", Son.class);
         son.fun1();
         /**
          * ---------@within @AnnoSon-------
          * ---------@target @AnnoSon-------
-         * fun1
+         * son fun1
          * */
         son.fun2();
         /**
          * ---------@within @AnnoFather-------
          * ---------@target @AnnoSon-------
-         * fun2
+         * father fun2
          * fun2()的运行时对象是son，但是fun2()却是在father中定义的。
          * */
     }
