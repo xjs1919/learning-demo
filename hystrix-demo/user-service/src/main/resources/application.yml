@@ -1,0 +1,26 @@
+server:
+  port: 8200
+
+spring:
+  application:
+    name: user-service
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
