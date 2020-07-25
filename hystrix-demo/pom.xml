@@ -22,6 +22,8 @@
 		<module>user-service</module>
 		<module>registry</module>
 		<module>activity-api</module>
+	        <module>dashboard</module>
+	        <module>turbine</module>
 	</modules>
 
     <dependencyManagement>

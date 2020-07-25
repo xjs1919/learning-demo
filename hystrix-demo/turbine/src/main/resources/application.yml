@@ -1,0 +1,18 @@
+server:
+  port: 8700
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+turbine:
+  appConfig: user-service
+  clusterNameExpression: "'default'"
+
+spring:
+  application:
+    name: turbine

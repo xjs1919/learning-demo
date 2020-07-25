@@ -14,6 +14,21 @@ eureka:
     service-url:
       defaultZone: http://localhost:8000/eureka/
 
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    IFeignActivitService#sendCouponAfterRegisterTimeout(Long):
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10
 management:
   endpoint:
     health:
