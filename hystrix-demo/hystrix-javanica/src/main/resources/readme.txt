@@ -1,0 +1,1 @@
+https://github.com/Netflix/Hystrix/tree/master/hystrix-contrib/hystrix-javanica
