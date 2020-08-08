@@ -1,0 +1,25 @@
+
+hystrix:
+  command:
+    # 这里的default代表默认的所有的command
+    # 可以换成某一个特定的command的key
+    # 默认就是方法的名字，因此重名的方法是无法分开设置的！
+    default:
+      execution:
+        isolation:
+          #strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 1000
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 5000
+      circuitBreaker:
+        requestVolumeThreshold: 4
+        errorThresholdPercentage: 50
+        sleepWindowInMilliseconds: 3000
+    # 设置某个具体的command的参数
+    commandKeyTest:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
