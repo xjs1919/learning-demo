@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>com.github.xjs</groupId>
-    <artifactId>openfeign</artifactId>
+    <artifactId>feign</artifactId>
     <version>1.0.0</version>
 
     <dependencies>
