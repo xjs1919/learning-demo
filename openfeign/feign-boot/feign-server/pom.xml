@@ -18,6 +18,10 @@
 			<groupId>com.github.xjs.openfeign.boot</groupId>
 			<artifactId>feign-api</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-core</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
