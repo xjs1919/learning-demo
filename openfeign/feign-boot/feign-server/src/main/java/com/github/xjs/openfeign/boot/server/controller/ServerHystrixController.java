@@ -26,4 +26,9 @@ public class ServerHystrixController implements HystrixApi {
     public String isolateHello(){
         return "ServerHystrixController isolateHello";
     }
+
+    @GetMapping("/error/hello")
+    public String errorHello(){
+        throw new RuntimeException("ServerHystrixController RuntimeException");
+    }
 }

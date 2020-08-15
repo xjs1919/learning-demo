@@ -1,9 +1,7 @@
 package com.github.xjs.openfeign.boot.client.controller.hystrix;
 
-import com.github.xjs.openfeign.boot.api.HystrixApi;
 import com.netflix.hystrix.HystrixCommand;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(name="ServerHystrixFeignClient",
