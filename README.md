@@ -23,5 +23,6 @@
 * ioc-demo： [Spring IOC的@Autowired、@Resource、@Inject的区别](https://mp.weixin.qq.com/s/6aPSgW-WAQUS-u5X4pJsDg)
 * mvcdemo：[SpringMVC不使用web.xml如何配置及源码解析](https://mp.weixin.qq.com/s/EtZgWXJAtvcPkgfg7XAo_Q)
 * mockspringboot： [三分钟手写极简版SpringBoot-重复造个轮子](https://mp.weixin.qq.com/s/X5Kh36vfUHbx-SJaAf_s3g)
+* error：[SpringBoot 2.2和2.3异常处理的一个小变化](https://mp.weixin.qq.com/s/HwKBdz1CfrVyL--cGbBWhQ)
 * hystrix-demo/hystrix： [hystrix入门-原生API使用](https://mp.weixin.qq.com/s/LTOQNHgkMnJSTTPBt2XNEw)
 * hystrix-demo/hystrix-javanica：[hystrix进阶-注解hystrix-javanica使用](https://mp.weixin.qq.com/s/3OVNekM7yjJ-5hN04K8RSQ)
