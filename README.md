@@ -26,3 +26,4 @@
 * error：[SpringBoot 2.2和2.3异常处理的一个小变化](https://mp.weixin.qq.com/s/HwKBdz1CfrVyL--cGbBWhQ)
 * hystrix-demo/hystrix： [hystrix入门-原生API使用](https://mp.weixin.qq.com/s/LTOQNHgkMnJSTTPBt2XNEw)
 * hystrix-demo/hystrix-javanica：[hystrix进阶-注解hystrix-javanica使用](https://mp.weixin.qq.com/s/3OVNekM7yjJ-5hN04K8RSQ)
+* hystrix-demo/hystrix-boot：[spring-cloud-starter-netflix-hystrix使用详解](https://mp.weixin.qq.com/s/_mvBR9Be0vsAdsXqtiyi-g)
