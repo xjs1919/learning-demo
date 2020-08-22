@@ -1,0 +1,3 @@
+userService:
+  ribbon:
+    listOfServers: "localhost:8080"
