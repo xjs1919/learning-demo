@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.github.xjs.order_auto_confirm.delay.DelayedService;
@@ -38,8 +40,9 @@ public class OrderService implements InitializingBean	 {
 			public void onDelayedArrived(DelayedOrder order) {
 				log.info("onDelayedArrived:{}", order.toString());
 				//查询订单的状态
-				int status = 0;//0代表未支付
-				if(status == 0) {
+				String orderId = order.getValue();
+				int status = getFromDb(orderId).getStatus();
+				if(status == 0) {//0代表未支付
 					//自动取消订单
 					autoCancelOrder(order);
 				}else if(status == 1){//1代表已经支付
@@ -65,9 +68,12 @@ public class OrderService implements InitializingBean	 {
 		OrderEntity orderEntity = new OrderEntity();
 		orderEntity.setStatus(0);
 		orderEntity.setOrderId(orderId);
+		// 插入数据库
 		log.info("订单{}创建完成，插入数据库", orderId);
 		DelayedOrder order = new DelayedOrder(60, orderId);
+		// 插入内存队列
 		delayedService.add(order);
+		// 插入redis
 		redisService.addToSet(ORDER_KEY, order);
 		return order;
 	}
@@ -77,10 +83,13 @@ public class OrderService implements InitializingBean	 {
 		OrderEntity orderEntity = getFromDb(orderId);
 		orderEntity.setOrderId(orderId);
 		orderEntity.setStatus(1);
+		// 修改数据库订单状态为已经支付
 		log.info("订单{}支付完成", orderId);
 		DelayedOrder order = delayedService.getDelayed(DelayedOrder.class, orderId);
 		if(order != null) {
+			// 从内存队列删除
 			delayedService.remove(DelayedOrder.class, order);
+			// 从redis删除
 			redisService.deleteFromSet(ORDER_KEY, order);
 		}
 		return true;
@@ -93,8 +102,11 @@ public class OrderService implements InitializingBean	 {
 		OrderEntity orderEntity = getFromDb(orderId);
 		orderEntity.setOrderId(orderId);
 		orderEntity.setStatus(2);
+		// 修改数据库状态
 		log.info("修改订单{}为已经取消", orderId);
+		 // 从内存队列删除
 		delayedService.remove(DelayedOrder.class, order);
+		// 从redis删除
 		redisService.deleteFromSet(ORDER_KEY, order);
 		return true;
 	}
@@ -104,5 +116,5 @@ public class OrderService implements InitializingBean	 {
 		entity.setOrderId(orderId);
 		return entity;
 	}
-	
+
 }

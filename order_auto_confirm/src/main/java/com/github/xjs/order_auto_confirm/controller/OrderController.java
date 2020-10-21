@@ -20,13 +20,19 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
-	
+
+	/**
+	 * 创建订单
+	 * */
 	@GetMapping("/create")
 	public String createOrder(@RequestParam("orderId")String orderId) {
 		DelayedOrder order = orderService.createOrder(orderId);
 		return order.getValue();
 	}
-	
+
+	/**
+	 * 支付订单
+	 * */
 	@GetMapping("/pay")
 	public Boolean payOrder(@RequestParam("orderId")String orderId) {
 		boolean ret = orderService.payOrder(orderId);
