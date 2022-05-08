@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_5.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, name, gender, birth
+    </sql>
+
+    <select id="selectByIds" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+        where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <update id="update" parameterType="com.xjs1919.mybatis.entity.User">
+        update users
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <insert id="insert" parameterType="com.xjs1919.mybatis.entity.User"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">name,</if>
+            <if test="gender!=null">gender,</if>
+            <if test="birth!=null">birth,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">#{name},</if>
+            <if test="gender!=null">#{gender},</if>
+            <if test="birth!=null">#{birth},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into users(name, gender)
+        values
+        <foreach collection ="list" item="item" separator =",">
+            (
+            #{item.name},#{item.gender}
+            )
+        </foreach >
+    </insert>
+
+    <update id="updateBatch">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update users
+            <set>
+                <if test="item.name != null">name = #{item.name},</if>
+                <if test="item.gender != null">gender = #{item.gender},</if>
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+
+
+    <update id="batchUpdateUseUpdateMultiTables" >
+        update users a
+        inner join (
+        <foreach collection="list" item="item" separator="union all">
+            <trim suffixOverrides=",">
+                select  ${item.id} as id,
+                        '${item.name}' as name,
+                        ${item.gender} as gender
+            </trim>
+        </foreach>
+        )b on a.id = b.id
+        set a.name   = case when isnull(b.name) or LENGTH(b.name) = 0 then a.name else b.name end,
+            a.gender = case when isnull(b.gender) then a.gender else b.gender end
+    </update>
+
+    <update id="updateBatchUseCaseWhen">
+        update users
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix= "name = case id" suffix="else name end,">
+                <foreach collection="list" item="item">
+                <if test="item.name != null and item.name.length() > 0">
+                when #{item.id} THEN #{item.name}
+                </if>
+                </foreach>
+            </trim>
+            <trim prefix= "gender = case id" suffix="else gender end,">
+                <foreach collection="list" item="item">
+                <if test="item.gender != null">
+                when #{item.id} then #{item.gender}
+                </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+    </update>
+
+</mapper>

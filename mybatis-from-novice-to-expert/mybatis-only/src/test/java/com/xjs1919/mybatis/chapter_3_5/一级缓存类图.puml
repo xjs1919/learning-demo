@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface SqlSession
+SqlSession <|-- DefaultSqlSession
+class DefaultSqlSession{
+  Executor executor
+}
+
+interface Executor
+abstract class BaseExecutor
+Executor <|- BaseExecutor
+BaseExecutor <|-- CachingExecutor
+BaseExecutor <|-- SimpleExecutor
+
+abstract class BaseExecutor{
+PerpetualCache localCache
+}
+
+class CachingExecutor{
+Executor delegate
+}
+
+SimpleExecutor <-- CachingExecutor
+CachingExecutor <-- DefaultSqlSession
+
+@enduml

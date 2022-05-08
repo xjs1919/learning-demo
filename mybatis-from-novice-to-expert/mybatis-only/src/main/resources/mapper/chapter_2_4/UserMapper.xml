@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_4.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, name, gender, birth
+    </sql>
+
+    <select id="selectByNameAndGender" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from users
+        where 1=1
+        <if test="name != null and name.length()>0">and name=#{name}</if>
+        <if test="gender != null">and gender = #{gender}</if>
+    </select>
+
+    <select id="selectByNameThenGender" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from users
+        where 1=1
+        <choose>
+            <when test="name != null"> and name = #{name}</when>
+            <otherwise> and gender = #{gender}</otherwise>
+        </choose>
+    </select>
+
+    <select id="selectByIds" resultType="com.xjs1919.mybatis.entity.User">
+        select <include refid="BaseColumns"/>
+        from users
+        where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectByNameAndGenderUsWhere" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from users
+        <where>
+            <if test="name != null and name.length()>0">and name=#{name}</if>
+            <if test="gender != null">and gender = #{gender}</if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.xjs1919.mybatis.entity.User">
+        update users
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" parameterType="com.xjs1919.mybatis.entity.User"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">name,</if>
+            <if test="gender!=null">gender,</if>
+            <if test="birth!=null">birth,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">#{name},</if>
+            <if test="gender!=null">#{gender},</if>
+            <if test="birth!=null">#{birth},</if>
+        </trim>
+    </insert>
+
+    <select id="selectByNameAndGenderUsTrimInsteadOfWhere" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from users
+        <trim prefix="where">
+            <trim prefixOverrides="and">
+                <if test="name != null and name.length()>0">and name=#{name}</if>
+                <if test="gender != null">and gender = #{gender}</if>
+            </trim>
+        </trim>
+    </select>
+
+    <update id="updateUsTrimInsteadOfSet">
+        update users
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+
+</mapper>

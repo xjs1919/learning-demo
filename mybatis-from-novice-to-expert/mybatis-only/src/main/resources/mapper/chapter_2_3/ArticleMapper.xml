@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_3.ArticleMapper">
+
+    <resultMap id="ArticleResultMap" type="com.xjs1919.mybatis.entity.Article">
+        <id     property="id"       column="article_id" />
+        <result property="title"    column="article_title" />
+        <result property="content"  column="article_content" />
+        <association property="user"
+                     javaType="com.xjs1919.mybatis.entity.User"
+                     resultMap="com.xjs1919.mybatis.mapper.chapter_2_3.UserMapper.userResultMap"/>
+    </resultMap>
+
+
+
+    <sql id="BaseColumns">
+        a.id      as article_id,
+        a.title   as article_title,
+        a.content as article_content,
+        a.userid  as article_user_id,
+        a.blogid  as article_blog_id
+    </sql>
+
+    <select id="selectById" resultMap="ArticleResultMap">
+        select <include refid="BaseColumns" />,
+               <include refid="com.xjs1919.mybatis.mapper.chapter_2_3.UserMapper.BaseColumns" />
+        from article a  left join users u
+        on a.userid = u.id
+        where a.id = #{id}
+    </select>
+
+    <resultMap id="ArticleResultMap2" type="com.xjs1919.mybatis.entity.Article">
+        <id     property="id"       column="article_id" />
+        <result property="title"    column="article_title" />
+        <result property="content"  column="article_content" />
+        <association property="user" column="article_user_id"
+                     javaType="com.xjs1919.mybatis.entity.User"
+                     select="com.xjs1919.mybatis.mapper.chapter_2_3.UserMapper.selectById"/>
+    </resultMap>
+
+    <select id="selectById2" resultMap="ArticleResultMap2">
+        select <include refid="BaseColumns" />
+        from article a
+        where a.id = #{id}
+    </select>
+
+    <select id="selectByBlogId" resultMap="ArticleResultMap2">
+        select <include refid="BaseColumns" />
+        from article a
+        where a.blogid = #{blogid}
+    </select>
+
+    <resultMap id="ArticleResultMap3" type="com.xjs1919.mybatis.entity.Article">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+    </resultMap>
+
+    <select id="selectById3" resultMap="ArticleResultMap3">
+        select *
+        from article a
+        where id = #{id}
+    </select>
+
+    <resultMap id="ArticleResultMap4" type="com.xjs1919.mybatis.entity.Article">
+        <association property="user" javaType="com.xjs1919.mybatis.entity.User">
+            <id column="user_id" property="id" />
+            <result column="name" property="name" />
+            <result column="gender" property="gender" />
+        </association>
+    </resultMap>
+
+    <select id="selectById4" resultMap="ArticleResultMap4">
+        select a.id, a.title, a.userid,
+        u.id user_id, u.name, u.gender
+        from article a
+        left join users u
+        on a.userid = u.id
+        where a.id = #{id}
+    </select>
+
+</mapper>

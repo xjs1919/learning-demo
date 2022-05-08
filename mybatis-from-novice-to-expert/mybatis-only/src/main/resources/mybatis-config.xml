@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="db.properties"></properties>
+    
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <environments default="development">
+        <environment id="development"><!--环境-->
+            <transactionManager type="JDBC"/><!--事务管理器-->
+            <dataSource type="POOLED"><!--数据源-->
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+<!--        <mapper resource="mapper/chapter_2_1/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_2/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_2/UserMapper2.xml"/>-->
+
+<!--        <mapper resource="mapper/chapter_2_3/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_3/ArticleMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_3/BlogMapper.xml"/>-->
+
+<!--        <mapper resource="mapper/chapter_2_4/UserMapper.xml"/>-->
+
+        <mapper resource="mapper/chapter_2_5/UserMapper.xml"/>
+
+    </mappers>
+
+</configuration>

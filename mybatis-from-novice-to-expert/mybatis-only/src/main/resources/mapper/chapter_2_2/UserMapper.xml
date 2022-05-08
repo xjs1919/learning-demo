@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, name, gender, birth
+    </sql>
+
+    <select id="selectAll" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from users
+        where id = #{id}
+    </select>
+
+    <select id="selectByParams" resultMap="com.xjs1919.mybatis.mapper.chapter_2_2.UserMapper.BaseResultMap">
+        select <include refid="com.xjs1919.mybatis.mapper.chapter_2_2.UserMapper.BaseColumns" />
+        from users
+        where name=#{name} and gender = #{gender}
+    </select>
+
+    <select id="selectUseIn" resultType="com.xjs1919.mybatis.entity.User">
+        select *
+        from users
+        where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectUseLike" resultType="com.xjs1919.mybatis.entity.User">
+        select *
+        from users
+        where name like concat('%', #{name}, '%')
+    </select>
+
+    <select id="selectUseLike2" resultMap="BaseResultMap">
+        select *
+        from users
+        where name like '%${name}%'
+    </select>
+
+    <insert id="insert" parameterType="com.xjs1919.mybatis.entity.User"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into users(name,gender,birth)values(#{name}, #{gender},#{birth})
+    </insert>
+
+    <update id="update" parameterType="com.xjs1919.mybatis.entity.User">
+        update users set name=#{name},gender=#{gender} where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.xjs1919.mybatis.entity.User">
+        delete from users where id = #{id}
+    </delete>
+
+</mapper>

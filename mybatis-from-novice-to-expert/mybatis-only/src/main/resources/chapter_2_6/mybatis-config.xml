@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="chapter_2_6/db.properties">
+        <property name="org.apache.ibatis.parsing.PropertyParser.enable-default-value" value="true"/>
+        <property name="org.apache.ibatis.parsing.PropertyParser.default-value-separator" value="?:"/>
+    </properties>
+    
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="useActualParamName" value="true" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias type= "com.xjs1919.mybatis.entity.chapter_2_6.User" alias="User" />
+    </typeAliases>
+
+    <typeHandlers>
+<!--        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"-->
+<!--             javaType="com.xjs1919.mybatis.entity.chapter_2_6.Gender"/>-->
+            <typeHandler handler="com.xjs1919.mybatis.entity.chapter_2_6.EnumAbleTypeHandler"
+                 javaType="com.xjs1919.mybatis.entity.chapter_2_6.Gender"/>
+    </typeHandlers>
+
+    <environments default="development">
+        <environment id="development"><!--环境-->
+            <transactionManager type="JDBC"/><!--事务管理器-->
+            <dataSource type="com.xjs1919.mybatis.entity.chapter_2_6.DruidDataSourceFactory"><!--数据源POOLED-->
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username?:root}"/>
+                <property name="password" value="${mysql.password?:123456}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+<!--        <mapper resource="mapper/chapter_2_1/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_2/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_2/UserMapper2.xml"/>-->
+
+<!--        <mapper resource="mapper/chapter_2_3/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_3/ArticleMapper.xml"/>-->
+<!--        <mapper resource="mapper/chapter_2_3/BlogMapper.xml"/>-->
+
+<!--        <mapper resource="mapper/chapter_2_4/UserMapper.xml"/>-->
+
+<!--        <mapper resource="mapper/chapter_2_5/UserMapper.xml"/>-->
+
+        <mapper resource="mapper/chapter_2_6/UserMapper.xml"/>
+        <mapper class="com.xjs1919.mybatis.mapper.chapter_2_6.User2Mapper" />
+
+    </mappers>
+
+</configuration>

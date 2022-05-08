@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+Spring容器 -> MapperScannerConfigurer: 回调
+MapperScannerConfigurer -> ClassPathMapperScanner: postProcessBeanDefinitionRegistry
+ClassPathMapperScanner -> ClassPathMapperScanner: ClassPathBeanDefinitionScanner.doScan
+note left: 返回Set<BeanDefinitionHolder>
+ClassPathMapperScanner -> ClassPathMapperScanner: processBeanDefinitions
+note left: 遍历每一个BeanDefinitionHolder\n重置BeanDefination的一些属性\n设置BeanClass=MapperFactoryBean.class \n设置sqlSessionFactory \n设置sqlSessionTemplate\n...
+ClassPathMapperScanner ->  Spring容器 :把修改以后的MapperFactoryBean注入到Spring容器
+@enduml

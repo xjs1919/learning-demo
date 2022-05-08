@@ -1,0 +1,2 @@
+mysql是否开启XA事务支持:
+SHOW VARIABLES LIKE '%xa%';

@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+SqlSessionTemplate -> sqlSessionProxy: selectOne
+sqlSessionProxy -> SqlSessionInterceptor: selectOne
+SqlSessionInterceptor -> SqlSessionUtils:invoke
+SqlSessionUtils -> TransactionSynchronizationManager:getSqlSession
+TransactionSynchronizationManager -> TransactionSynchronizationManager:getResource
+note left:从ThreadLocal中取，返回SqlSessionHolder
+TransactionSynchronizationManager -> SqlSessionHolder
+SqlSessionHolder -> SqlSessionHolder: getSqlSession
+note left:返回DefaultSqlSession
+SqlSessionHolder -> DefaultSqlSession
+DefaultSqlSession -> DefaultSqlSession: selectOne
+@enduml

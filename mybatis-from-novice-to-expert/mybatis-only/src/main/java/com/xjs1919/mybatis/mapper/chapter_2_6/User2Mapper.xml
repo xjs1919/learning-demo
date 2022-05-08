@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_6.User2Mapper">
+
+    <select id="selectById" resultType="com.xjs1919.mybatis.entity.chapter_2_6.User">
+        select * from users
+        where id = #{id}
+    </select>
+
+
+    <select id="selectByNameAndGender" resultType="com.xjs1919.mybatis.entity.chapter_2_6.User">
+        select * from users
+        where name = #{name} and gender = #{gender}
+    </select>
+
+</mapper>

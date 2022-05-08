@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xxxMapper">
+
+    <cache />
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+    </resultMap>
+
+    <update id="update" parameterType="com.xjs1919.mybatis.entity.User">
+        update users
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,16 @@
+app:
+  ds1:
+    url: jdbc:mysql://localhost:3306/db1?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  ds2:
+    url: jdbc:mysql://localhost:3306/db2?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+logging:
+  level:
+    root: info
+    com.atomikos: DEBUG
+    org.springframework.transaction: DEBUG
+    org.mybatis: DEBUG
+    com.xjs1919.mybatis: DEBUG

@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+DefaultSqlSession -> BaseExecutor: selectList
+BaseExecutor -> SimpleExecutor: doQuery
+SimpleExecutor -> RoutingStatementHandler: prepareStatement
+RoutingStatementHandler -> PreparedStatementHandler: parameterize
+group 参数设置
+PreparedStatementHandler -> DefaultParameterHandler: parameterize
+DefaultParameterHandler -> DefaultParameterHandler: setParameters
+end
+SimpleExecutor -> RoutingStatementHandler: doQuery
+RoutingStatementHandler -> PreparedStatementHandler: query
+group 查询数据库
+PreparedStatementHandler -> PreparedStatementHandler: ps.execute()
+end
+group 组装结果
+PreparedStatementHandler -> DefaultResultSetHandler: handleResultSets
+end
+@enduml

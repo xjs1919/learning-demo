@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.dao.UserMapper">
+
+    <select id="selectById" resultType="com.xjs1919.mybatis.domain.User">
+        select id, name, gender, birth from users
+        where id = #{id}
+    </select>
+
+    <update id="update">
+        update users
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">name,</if>
+            <if test="gender!=null">gender,</if>
+            <if test="birth!=null">birth,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">#{name},</if>
+            <if test="gender!=null">#{gender},</if>
+            <if test="birth!=null">#{birth},</if>
+        </trim>
+    </insert>
+
+</mapper>

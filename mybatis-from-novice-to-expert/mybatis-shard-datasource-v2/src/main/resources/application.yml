@@ -1,0 +1,17 @@
+app:
+  shard0:
+    url: jdbc:mysql://localhost:3306/shard0?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  shard1:
+    url: jdbc:mysql://localhost:3306/shard1?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+logging:
+  level:
+    root: info
+    org.springframework.transaction: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.mybatis: DEBUG
+    org.apache.ibatis: DEBUG
+    com.xjs1919.mybatis: DEBUG

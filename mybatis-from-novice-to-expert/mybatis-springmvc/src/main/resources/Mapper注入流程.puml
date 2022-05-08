@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+Spring容器 -> MapperFactoryBean: 回调
+MapperFactoryBean -> MapperFactoryBean: afterPropertiesSet
+note left:MapperFactoryBean包含:\nsqlSessionTemplate\nmapperInterface
+MapperFactoryBean-> SqlSessionTemplate:
+SqlSessionTemplate-> SqlSessionTemplate: getConfiguration
+note left: 返回Configuration
+SqlSessionTemplate-> Configuration:
+Configuration->Configuration: addMapper
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+CachingExecutor -> TransactionalCacheManager: query
+TransactionalCacheManager -> TransactionalCache: getObject
+
+TransactionalCache -> Cache: getObject
+Cache -> Cache: getObject
+@enduml

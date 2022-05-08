@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_3_6.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, name, gender, birth
+    </sql>
+
+    <select id="selectByIds" resultType="com.xjs1919.mybatis.entity.User" useCache="true">
+        select * from users
+        where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="update" parameterType="com.xjs1919.mybatis.entity.User">
+        update users
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birth != null ">birth = #{birth},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateBatchUseCaseWhen">
+        update users
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix= "name = case id" suffix="else name end,">
+                <foreach collection="list" item="item">
+                <if test="item.name != null and item.name.length() > 0">
+                when #{item.id} THEN #{item.name}
+                </if>
+                </foreach>
+            </trim>
+            <trim prefix= "gender = case id" suffix="else gender end,">
+                <foreach collection="list" item="item">
+                <if test="item.gender != null">
+                when #{item.id} then #{item.gender}
+                </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+    </update>
+
+</mapper>

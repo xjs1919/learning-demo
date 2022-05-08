@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_3.BlogMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.Blog">
+        <id         property="id"      column="blog_id"   />
+        <result     property="title"   column="blog_title"  />
+        <collection property="articles"
+                    resultMap="com.xjs1919.mybatis.mapper.chapter_2_3.ArticleMapper.ArticleResultMap"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        b.id  as blog_id,
+        b.title as blog_title
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>,
+               <include refid="com.xjs1919.mybatis.mapper.chapter_2_3.ArticleMapper.BaseColumns"/>,
+               <include refid="com.xjs1919.mybatis.mapper.chapter_2_3.UserMapper.BaseColumns"/>
+        from blog b
+        left join article a on b.id = a. blogid
+        left join users u   on a.userid = u.id
+        where b.id = #{id}
+    </select>
+
+
+
+    <resultMap id="BaseResultMap2" type="com.xjs1919.mybatis.entity.Blog">
+        <id         property="id"      column="blog_id"   />
+        <result     property="title"   column="blog_title"  />
+        <collection property="articles" column="blog_id"
+                    ofType="com.xjs1919.mybatis.entity.Article"
+                    select="com.xjs1919.mybatis.mapper.chapter_2_3.ArticleMapper.selectByBlogId"/>
+    </resultMap>
+
+    <select id="selectById2" resultMap="BaseResultMap2">
+        select <include refid="BaseColumns"/>
+        from blog b
+        where id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Blog{
+    - Integer id
+    - String title
+    - List<Article> articles
+}
+note right: 一个Blog包含多个Article
+
+class Article{
+    - Integer id
+    - String title
+    - String content
+    - User user
+}
+note right: 一个Article引用一个User
+
+class Users {
+    - Integer id
+    - String name
+    - Integer gender
+    - Date birth
+}
+
+Blog o-- Article
+Article --> Users
+
+@enduml

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xjs1919</groupId>
+	<artifactId>mybatis-from-novice-to-expert</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<java.version>1.8</java.version>
+		<mybatis.version>3.5.9</mybatis.version>
+		<mysql.driver.version>8.0.20</mysql.driver.version>
+		<log4j.version>2.17.1</log4j.version>
+		<druid.version>1.2.8</druid.version>
+		<spring.version>5.3.17</spring.version>
+		<jackson.version>2.9.0</jackson.version>
+		<springboot.version>2.6.5</springboot.version>
+		<mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
+		<transmittable-thread-local.version>2.12.0</transmittable-thread-local.version>
+	</properties>
+	
+	<modules>
+		<module>mybatis-only</module>
+		<module>mybatis-code-generator</module>
+		<module>mybatis-springmvc</module>
+		<module>mybatis-springboot</module>
+		<module>mybatis-multi-datasource</module>
+		<module>mybatis-shard-datasource-v1</module>
+		<module>mybatis-shard-datasource-v2</module>
+		<module>mybatis-shard-starter</module>
+	</modules>
+
+</project>

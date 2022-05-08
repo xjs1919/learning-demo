@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.dao.ds2.GoodsMapper">
+
+    <update id="update" parameterType="com.xjs1919.mybatis.domain.Goods">
+        update goods
+        <set>
+            <if test="name != null and name.length() > 0">name = #{name},</if>
+            <if test="title != null and title.length() > 0">title = #{title},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

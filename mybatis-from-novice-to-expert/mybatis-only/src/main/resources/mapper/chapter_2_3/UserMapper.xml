@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_2_3.UserMapper">
+
+    <resultMap id="userResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id  property="id" column="user_id" />
+        <result  property="name"  column="user_name"/>
+        <result  property="gender" column="user_gender"/>
+        <result  property="birth" column="user_birth"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        u.id      as user_id,
+        u.name    as user_name,
+        u.gender  as user_gender,
+        u.birth   as user_birth
+    </sql>
+
+    <select id="selectById" resultMap="userResultMap">
+        select <include refid="BaseColumns" />
+        from users u
+        where id = #{id}
+    </select>
+
+</mapper>

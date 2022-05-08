@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+MapperProxyFactory -> MapperProxy: newInstance
+note right: 动态代理
+MapperProxy -> PlainMethodInvoker:invoke
+PlainMethodInvoker->MapperMethod:invoke
+MapperMethod->MapperMethod:execute
+
+
+@enduml

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjs1919.mybatis.mapper.chapter_3_1.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.xjs1919.mybatis.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, name, gender, birth
+    </sql>
+
+    <select id="selectById" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+        where id =#{param1}
+    </select>
+
+    <select id="selectByIds" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+        where id in
+        <foreach collection="param1" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByNameAndGender" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+        where name=#{param1} and gender = #{param2}
+    </select>
+
+    <select id="selectByIdsAndNameAndGender" resultType="com.xjs1919.mybatis.entity.User">
+        select * from users
+        where id in
+        <foreach collection="arg0" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        and name = #{arg1} and gender = #{arg2}
+    </select>
+
+</mapper>

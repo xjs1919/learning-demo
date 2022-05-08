@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+DefaultSqlSession -> CachingExecutor: selectList
+CachingExecutor -> SimpleExecutor: query
+SimpleExecutor -> SimpleExecutor: query
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+SpringManagedTransaction -> DataSourceUtils: openConnection
+DataSourceUtils-> TransactionSynchronizationManager:getConnection
+TransactionSynchronizationManager->TransactionSynchronizationManager:getResource
+note left: 从ThreadLocal中取，返回ConnectionHolder
+TransactionSynchronizationManager->ConnectionHolder:
+ConnectionHolder->ConnectionHolder:getConnection返回Connection
+
+@enduml
