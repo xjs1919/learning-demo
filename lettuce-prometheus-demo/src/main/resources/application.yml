@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo-application
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+  metrics:
+    tags:
+      application: ${spring.application.name}
