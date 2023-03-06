@@ -1,7 +1,7 @@
-package cn.itcast.user.web;
+package com.github.xjs.web;
 
-import cn.itcast.user.pojo.User;
-import cn.itcast.user.service.UserService;
+import com.github.xjs.pojo.User;
+import com.github.xjs.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package cn.itcast.user.service;
+package com.github.xjs.service;
 
-import cn.itcast.user.pojo.User;
+import com.github.xjs.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

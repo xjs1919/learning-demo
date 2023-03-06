@@ -1,4 +1,4 @@
-package cn.itcast.user.config;
+package com.github.xjs.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

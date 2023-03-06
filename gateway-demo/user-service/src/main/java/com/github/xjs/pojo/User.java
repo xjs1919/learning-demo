@@ -1,4 +1,4 @@
-package cn.itcast.user.pojo;
+package com.github.xjs.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
