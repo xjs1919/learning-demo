@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:~/users
+    driver-class-name: org.h2.Driver
+    username: root #随便定义
+    password: 123456 #随便定义
+  h2:
+    console:
+      path: /h2-console  #h2嵌入式数据库控制台
+      enabled: true
