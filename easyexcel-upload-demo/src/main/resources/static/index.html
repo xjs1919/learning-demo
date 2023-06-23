@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传下载测试</title>
+</head>
+<body>
+下载Excel模板:<br/>
+<form action="/download/template" method="get">
+    <input type="submit" value="点击下载Excel模板" />
+</form>
+--------------------------------------<br/>
+
+Excel文件上传:<br/>
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" value="请选择要导入的Excel文件" name="file"/>
+  <input type="submit" value="提交" />
+</form>
+--------------------------------------<br/>
+
+Excel文件直接下载:<br/>
+<form action="/download" method="get">
+  <input type="submit" value="点击下载Excel" />
+</form>
+
+</body>
+</html>
