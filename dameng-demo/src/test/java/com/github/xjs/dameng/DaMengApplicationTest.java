@@ -68,17 +68,9 @@ public class DaMengApplicationTest {
     }
 
     private static void fixEncoding(Connection connection){
-        try{
-            Field field = connection.getClass().getDeclaredField("serverEncoding");
-            field.setAccessible(true);
-            Object serverEncoding = field.get(connection);
-            if(serverEncoding instanceof String){
-                field.set(connection, "UTF-8");
-            }else if(serverEncoding instanceof Charset){
-                field.set(connection, StandardCharsets.UTF_8);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
+        if(connection instanceof DmdbConnection){
+            DmdbConnection dmdbConnection = (DmdbConnection)connection;
+            dmdbConnection.setServerEncoding(StandardCharsets.UTF_8);
         }
     }
 }
