@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://192.168.137.138:5236
+    username: DM
+    password: dameng123
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

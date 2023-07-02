@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.xjs.dameng.mapper.DepartmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.xjs.dameng.domain.Department">
+        <result column="department_id" property="departmentId" />
+        <result column="department_name" property="departmentName" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from department
+    </select>
+
+</mapper>
