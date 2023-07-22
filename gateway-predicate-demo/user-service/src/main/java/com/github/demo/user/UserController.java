@@ -1,10 +1,7 @@
 package com.github.demo.user;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -12,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping("/{id}")
-    public String queryById(@PathVariable("id") Long id) {
-        return "user" + id;
+    public String queryById(@PathVariable("id") Long id, @RequestHeader(value = "auth", required = false)String auth) {
+        return "user=" + id+",auth="+auth;
     }
 
 }
