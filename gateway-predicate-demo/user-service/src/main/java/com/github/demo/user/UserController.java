@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @GetMapping("/{id}")
-    public String queryById(@PathVariable("id") Long id, @RequestHeader(value = "auth", required = false)String auth) {
-        return "user=" + id+",auth="+auth;
+    public String queryById(@PathVariable("id") Long id) {
+        return "user=" + id;
     }
 
 }

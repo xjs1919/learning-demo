@@ -9,7 +9,5 @@ spring:
           predicates:
             - Path=/user/*
             - Hour=9,21
-          filters:
-            - QueryToHeader=authorization,auth
 server:
   port: 8080
