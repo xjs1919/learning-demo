@@ -1,0 +1,7 @@
+upload:
+  service: minio
+minio:
+  endpoint: http://192.168.137.138:9000
+  bucket: itheima
+  username: minio
+  password: minio123
