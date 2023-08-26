@@ -1,6 +1,5 @@
 package com.github.xjs.web;
 
-import com.github.xjs.feign.GoodsClient;
 import com.github.xjs.pojo.User;
 import com.github.xjs.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,17 +14,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    GoodsClient goodsClient;
-
     @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") Long id,
-                          @RequestHeader(value = "X-SXJJ", defaultValue = "") String sxjj) {
-        return userService.queryById(id);
-    }
+    public User queryById(@PathVariable("id") Long id) {
+        if(id %2 == 0){
+            return userService.queryById(id);
+        }else {
+            throw new RuntimeException("查询用户异常");
+        }
 
-    @GetMapping("/goods/{id}")
-    public String goods(@PathVariable("id") Long id) {
-        return goodsClient.queryById(id);
     }
 }

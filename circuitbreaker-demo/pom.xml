@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.xjs</groupId>
-    <artifactId>gatway-demo</artifactId>
+    <artifactId>circuitbreaker-demo</artifactId>
     <version>1.0</version>
     <modules>
+        <module>order-service</module>
         <module>user-service</module>
-        <module>gateway-server</module>
-        <module>goods-servicde</module>
     </modules>
 
     <packaging>pom</packaging>
