@@ -1,0 +1,8 @@
+server:
+  port: 8081
+  compression:
+    enabled: true
+    min-response-size: 1B
+    mime-types:
+      - "application/json"
+      - "application/xml"

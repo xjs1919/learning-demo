@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    min-response-size: 1B
+    mime-types:
+      - "application/json"
+      - "application/xml"
+logging:
+  level:
+    root: info
+    com.github.xjs: debug
+feign:
+  client:
+    config:
+      default:
+        logger-level: full
+  compression:
+    request:
+      enabled: true
+      mime-types:
+        - "application/xml"
+        - "application/json"
+      min-request-size: 1
+    response:
+      enabled: true
