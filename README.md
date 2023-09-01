@@ -28,4 +28,5 @@
 * hystrix-demo/hystrix-javanica：[hystrix进阶-注解hystrix-javanica使用](https://mp.weixin.qq.com/s/3OVNekM7yjJ-5hN04K8RSQ)
 * hystrix-demo/hystrix-boot：[spring-cloud-starter-netflix-hystrix使用详解](https://mp.weixin.qq.com/s/_mvBR9Be0vsAdsXqtiyi-g)
 * gateway-predicate-demo：[Spring-Cloud-Gateway如何自定义断言工厂？](https://mp.weixin.qq.com/s/COUga3dfnYwdp_PdWlHDZw)
-* gateway-filter-demo:[Spring-Cloud-Gateway如何自定义网关过滤器？]()
+* gateway-filter-demo:[Spring-Cloud-Gateway如何自定义网关过滤器？](https://mp.weixin.qq.com/s/lmyno3aOlhB-00DlF7raLQ)
+* gateway-filter-order:[Spring-Cloud-Gateway的过滤器的执行顺序问题](https://mp.weixin.qq.com/s/BGjVNRdmY9mUevCfMw2pUg)
