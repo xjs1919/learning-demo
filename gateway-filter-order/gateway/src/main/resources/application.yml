@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/*
+          filters:
+            - AddRequestHeader=RouterFilter1, router1
+            - AddRequestHeader=RouterFilter2, router2
+      default-filters:
+        - AddRequestHeader=DefaultFilter1, default1
+        - AddRequestHeader=DefaultFilter2, default2
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+    org.springframework.cloud.gateway: debug
