@@ -1,0 +1,26 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false # 默认就是false
+          lower-case-service-id: true
+      routes:
+        - id: userservice
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/**
+        - id: orderservice
+          uri: http://localhost:8080
+          predicates:
+            - Path=/order/**
+
+
+
+
+
+
