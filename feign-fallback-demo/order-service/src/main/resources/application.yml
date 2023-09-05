@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: order-service
+server:
+  port: 8080
+feign:
+  hystrix:
+    enabled: true
