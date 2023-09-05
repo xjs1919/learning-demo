@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.github.xjs.config.MvcConfig, \
+com.github.xjs.config.FeignConfig, \
 com.github.xjs.config.ThreadPoolConfig, \
 com.github.xjs.config.RestConfig

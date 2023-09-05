@@ -8,8 +8,4 @@ public class FeignConfig {
     public UserClientFallbackFactory userClientFallbackFactory(){
         return new UserClientFallbackFactory();
     }
-    @Bean
-    public TraceIdInterceptor requestIdInterceptor(){
-        return new TraceIdInterceptor();
-    }
 }

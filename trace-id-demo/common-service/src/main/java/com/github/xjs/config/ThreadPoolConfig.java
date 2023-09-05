@@ -1,8 +1,7 @@
 package com.github.xjs.config;
 
-import com.github.xjs.Constants;
+import com.github.xjs.util.TraceIdRunnable;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -42,13 +41,7 @@ public class ThreadPoolConfig implements AsyncConfigurer {
         // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         // 设置traceId
-        executor.setTaskDecorator((runnable)->{
-            String traceId = MDC.get(Constants.TRACE_ID);
-            return ()->{
-                MDC.put(Constants.TRACE_ID, traceId);
-                runnable.run();
-            };
-        });
+        executor.setTaskDecorator((runnable)->new TraceIdRunnable(runnable));
         //执行初始化
         executor.initialize();
         return executor;
