@@ -3,6 +3,7 @@ server:
 spring:
   application:
     name: order-service
+
 logging:
   level:
     root: info
@@ -12,3 +13,6 @@ feign:
     config:
       default:
         logger-level: full
+  circuitbreaker:
+    enabled: true
+

@@ -29,6 +29,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>2.2.10.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.xjs</groupId>
             <artifactId>common-service</artifactId>
             <version>1.0</version>

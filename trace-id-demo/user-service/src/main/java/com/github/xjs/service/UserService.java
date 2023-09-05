@@ -10,6 +10,11 @@ public class UserService {
 
     public User queryById(Long id) {
         log.info("==========查询id={}的用户", id);
-        return new User(id, "hello", "bj");
+        if(id % 2 == 0){
+            return new User(id, "hello", "bj");
+        }else{
+            log.error("查询用户信息异常");
+            throw new RuntimeException("查询用户信息异常");
+        }
     }
 }
