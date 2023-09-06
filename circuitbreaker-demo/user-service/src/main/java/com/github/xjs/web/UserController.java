@@ -16,6 +16,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Long id) {
+        log.info("UserController.queryById id:{}", id);
         if(id %2 == 0){
             return userService.queryById(id);
         }else {

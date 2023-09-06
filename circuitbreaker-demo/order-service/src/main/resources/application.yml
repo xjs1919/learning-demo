@@ -1,5 +1,29 @@
 server:
   port: 8080
+spring:
+  application:
+    name: order-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
 feign:
   circuitbreaker:
     enabled: true
+hystrix:
+  command:
+    # default是对所有的feign接口都适用
+    UserClient#queryById(Long):
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 5000
+      circuitBreaker:
+        requestVolumeThreshold: 2
+        errorThresholdPercentage: 50
+        sleepWindowInMilliseconds: 10000
+      # 5秒种以内，请求次数达到2个以上，失败率达到50%以上，则开启跳闸10秒

@@ -19,6 +19,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public Order queryById(@PathVariable("id") Long id) {
+        log.info("OrderController#queryById id:{}", id);
         Order order = new Order(id, "测试商品", "100", id, userClient.queryById(id));
         return order;
     }

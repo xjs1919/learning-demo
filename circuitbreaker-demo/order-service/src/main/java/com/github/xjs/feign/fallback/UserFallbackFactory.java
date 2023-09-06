@@ -12,7 +12,7 @@ public class UserFallbackFactory implements FallbackFactory<UserClient> {
         return new UserClient(){
             @Override
             public User queryById(Long id) {
-                return new User(0L, "fallback user", null);
+                return new User(0L, "fallback user", "fallback address");
             }
         };
     }
