@@ -16,11 +16,10 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Long id) {
-        if(id %2 == 0){
+        if(id % 2 == 0){
             return userService.queryById(id);
         }else {
             throw new RuntimeException("查询用户异常");
         }
-
     }
 }

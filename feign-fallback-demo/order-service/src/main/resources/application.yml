@@ -6,3 +6,14 @@ server:
 feign:
   hystrix:
     enabled: true
+hystrix:
+  command:
+    default:
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 5000
+      circuitBreaker:
+        requestVolumeThreshold: 2
+        errorThresholdPercentage: 50
+        sleepWindowInMilliseconds: 10000
+      # 5秒种以内，请求次数达到2个以上，失败率达到50%以上，则开启跳闸10秒
