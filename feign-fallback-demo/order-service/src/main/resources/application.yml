@@ -8,7 +8,8 @@ feign:
     enabled: true
 hystrix:
   command:
-    default:
+    # default是对所有的feign接口都适用
+    UserClient#queryById(Long):
       metrics:
         rollingStats:
           timeInMilliseconds: 5000
