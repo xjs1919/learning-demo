@@ -14,9 +14,9 @@
 	<build>
 		<plugins>
 			<plugin>
-		          <groupId>com.xjs1919.org.mybatis.generator</groupId>
+		          <groupId>org.mybatis.generator</groupId>
 		          <artifactId>mybatis-generator-maven-plugin</artifactId>
-				  <version>1.4.6-SNAPSHOT</version>
+				  <version>1.4.2</version>
 					<configuration>
 						<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
 						<overwrite>true</overwrite>
