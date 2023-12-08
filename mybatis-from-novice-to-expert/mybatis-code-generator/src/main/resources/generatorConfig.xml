@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 
-    <context id="simple" targetRuntime="MyBatis3Simple">
+    <context id="simple" targetRuntime="MyBatis3">
 
         <commentGenerator>
              <property name="suppressAllComments" value="true"/>
