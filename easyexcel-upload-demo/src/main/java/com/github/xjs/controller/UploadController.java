@@ -2,9 +2,13 @@ package com.github.xjs.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.enums.WriteDirectionEnum;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.metadata.fill.FillConfig;
+import com.alibaba.excel.write.metadata.fill.FillWrapper;
+import com.github.xjs.pojos.DetailDTO;
 import com.github.xjs.pojos.User;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,15 +82,37 @@ public class UploadController {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+
+        // 加载模板
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
-        ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).withTemplate(inputStream).excelType(ExcelTypeEnum.XLSX).build();
+        // 输出到response
+        ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream())
+                .withTemplate(inputStream)
+                .excelType(ExcelTypeEnum.XLSX).build();
+
+        // 得到sheet
         WriteSheet writeSheet = EasyExcel.writerSheet().build();
+
+        // 单个字段填充
         Map<String, Object> map = new HashMap<>();
         map.put("weekAdd",100);
         map.put("monthAdd",200);
         map.put("total",300);
         excelWriter.fill(map, writeSheet);
+
+        // 列表竖向填充
+        List<DetailDTO> details = new ArrayList<>();
+        details.add(new DetailDTO(new SimpleDateFormat("yyyy-MM-dd").parse("2023-12-10"), 100));
+        details.add(new DetailDTO(new SimpleDateFormat("yyyy-MM-dd").parse("2023-12-11"), 80));
+        details.add(new DetailDTO(new SimpleDateFormat("yyyy-MM-dd").parse("2023-12-12"), 200));
+        excelWriter.fill(new FillWrapper("details", details), writeSheet);
+
+        // 列表横向填充
+        FillConfig fillConfig = FillConfig.builder().direction(WriteDirectionEnum.HORIZONTAL).build();
+        excelWriter.fill(new FillWrapper("week", details),fillConfig, writeSheet);
+
         excelWriter.finish();
+
     }
 
 
