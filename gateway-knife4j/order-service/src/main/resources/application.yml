@@ -1,0 +1,12 @@
+server:
+  port: 9601
+spring:
+  application:
+    name: order-service
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

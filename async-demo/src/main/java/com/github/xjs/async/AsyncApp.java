@@ -2,35 +2,38 @@ package com.github.xjs.async;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.scheduling.config.TaskExecutorFactoryBean;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Configuration
 @EnableAsync
 public class AsyncApp {
+
+    private static AtomicInteger num = new AtomicInteger(0);
 
     @Bean
     public AsyncBean asyncBean(){
         return new AsyncBean();
     }
 
-//    @Bean //第一种方式
-//    public Executor taskExecutor(){
-//        ThreadPoolExecutorFactoryBean factoryBean = new ThreadPoolExecutorFactoryBean();
-//        ThreadPoolExecutor executor = new ThreadPoolExecutor(
-//                1,
-//                1,
-//                30,
-//                TimeUnit.MINUTES,
-//                new LinkedBlockingQueue<>());
-//        return executor;
-//    }
+    @Bean("helloExecutor") //第一种方式
+    public Executor helloExecutor(){
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                1,
+                1,
+                30,
+                TimeUnit.MINUTES,
+                new LinkedBlockingQueue<>(),
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        return new Thread(r , "helloExecutor-" + num.incrementAndGet());
+                    }
+                });
+        return executor;
+    }
 
 //    @Bean //第二种方式
 //    public TaskExecutor taskExecutorSpring(){
@@ -56,20 +59,20 @@ public class AsyncApp {
 //        return factory;
 //    }
 
-    @Bean //第五种方式
-    public CustomAsyncConfigure asyncConfigure(){
-        return new CustomAsyncConfigure();
-    }
-
-    public static class CustomAsyncConfigure implements AsyncConfigurer{
-        @Override
-        public Executor getAsyncExecutor() {
-            ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-            executor.setCorePoolSize(2);
-            executor.setThreadNamePrefix("pool-5-");
-            executor.initialize();
-            return executor;
-        }
-    }
+//    @Bean //第五种方式
+//    public CustomAsyncConfigure asyncConfigure(){
+//        return new CustomAsyncConfigure();
+//    }
+//
+//    public static class CustomAsyncConfigure implements AsyncConfigurer{
+//        @Override
+//        public Executor getAsyncExecutor() {
+//            ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+//            executor.setCorePoolSize(2);
+//            executor.setThreadNamePrefix("pool-5-");
+//            executor.initialize();
+//            return executor;
+//        }
+//    }
 
 }

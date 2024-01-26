@@ -10,7 +10,7 @@ public class AsyncBean {
         System.out.println(Thread.currentThread().getName()+",print");
     }
 
-    @Async
+    @Async("helloExecutor")
     public void printAsync(){
         System.out.println(Thread.currentThread().getName()+",print");
     }

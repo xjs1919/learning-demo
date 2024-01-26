@@ -1,0 +1,12 @@
+server:
+  port: 9501
+spring:
+  application:
+    name: user-service
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
