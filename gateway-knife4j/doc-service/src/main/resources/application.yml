@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: doc-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+knife4j:
+  enableAggregation: true
+  nacos:
+    enable: true  # 开启Nacos模式
+    serviceUrl: http://localhost:8848/nacos # Nacos注册中心地址
+    routes:
+      - name: 用户服务nacos  #微服务在聚合文档中的名称
+        serviceName: user-service # 微服务的服务名
+        location: /v2/api-docs # 微服务文档资源路径
+      - name: 订单服务nacos
+        serviceName: order-service
+        location: /v2/api-docs
+#  cloud:
+#    enable: true
+#    routes:
+#      - name: 用户服务cloud  #微服务在聚合文档中的名称
+#        uri: localhost:8082 # 微服务的http地址
+#        location: /v2/api-docs # 微服务文档资源路径
+#      - name: 订单服务cloud
+#        uri: localhost:8081
+#        location: /v2/api-docs

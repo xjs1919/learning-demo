@@ -12,6 +12,7 @@
         <module>gateway</module>
         <module>user-service</module>
         <module>order-service</module>
+        <module>doc-service</module>
     </modules>
 
     <properties>
