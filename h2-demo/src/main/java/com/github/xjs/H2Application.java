@@ -19,10 +19,6 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class H2Application implements ApplicationRunner {
 
-    /**
-     * main方法
-     * @param args 参数
-     * */
     public static void main(String[] args) {
         SpringApplication.run(H2Application.class, args);
     }

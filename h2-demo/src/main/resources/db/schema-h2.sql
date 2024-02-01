@@ -1,5 +1,5 @@
 /**
-出货信息表
+用户表
  */
 DROP TABLE IF EXISTS tb_user;
 CREATE TABLE tb_user

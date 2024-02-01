@@ -13,11 +13,12 @@ import javax.sql.DataSource;
 import java.io.File;
 
 /**
- * emq客户端采用嵌入式数据库h2
+ * 嵌入式数据库h2
  */
 @Slf4j
 @Configuration
-@AutoConfigureAfter(DataSource.class) //DataSource创建完后才初始化此类
+//DataSource创建完后才初始化此类
+@AutoConfigureAfter(DataSource.class)
 public class H2DataSourceConfig {
 
     //初始化sql
