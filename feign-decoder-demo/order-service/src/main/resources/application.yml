@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: order-service
+logging:
+  level:
+    root: info
+    com.github.xjs: debug
+feign:
+  client:
+    config:
+      default:
+        logger-level: full
