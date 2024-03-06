@@ -1,0 +1,6 @@
+#Spring boot视图配置
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
