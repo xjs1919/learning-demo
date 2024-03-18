@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
+
     @Autowired
     private WebsocketServer websocketServer;
 
@@ -17,4 +18,5 @@ public class DemoController {
         websocketServer.sendToClient(clientId, msg);
         return "ok";
     }
+
 }
