@@ -1,4 +1,21 @@
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+# 方式1
+#spring:
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+# 方式2
+knife4j:
+  enable: true
+  openapi:
+    title: 接口文档
+    description: "接口文档"
+    email: 605162215@qq.com
+    concat: xjs1919
+    url: https://github.com/xjs1919
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.github.xjs.controller

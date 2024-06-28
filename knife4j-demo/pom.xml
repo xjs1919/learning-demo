@@ -24,12 +24,19 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+<!--    方式1   -->
+<!--    <dependency>-->
+<!--      <groupId>com.github.xiaoymin</groupId>-->
+<!--      <artifactId>knife4j-spring-boot-starter</artifactId>-->
+<!--      <version>3.0.2</version>-->
+<!--    </dependency>-->
 
-    <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-spring-boot-starter</artifactId>
-      <version>3.0.2</version>
-    </dependency>
+      <!--    方式2   -->
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+        <version>4.1.0</version>
+      </dependency>
 
   </dependencies>
 </project>
