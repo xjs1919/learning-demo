@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.xjs.sbdemo.mapper.UserMapper">
+	
+	<select id="listAll" resultType="com.github.xjs.sbdemo.entity.User">
+		select * from user
+	</select>
+	
+	<insert id="insert" parameterType="com.github.xjs.sbdemo.entity.User">
+		insert into user(id,name, gender)values(#{id}, #{name},#{gender})
+	</insert>
+	
+	<select id = "isTableExist" resultType="int">
+			SELECT count(*) FROM sqlite_master where type='table' and name ='user'
+	</select>
+	<select id="selectById" resultType="com.github.xjs.sbdemo.entity.User">
+			select * from user where id = #{id}
+	</select>
+
+	<update id="createTable">
+		create table user(id int, name varchar(20), gender int)
+	</update>
+	
+	<update id="dropTable">
+		drop table user
+	</update>
+	
+
+</mapper>
