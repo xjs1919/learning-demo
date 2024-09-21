@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonp</title>
+</head>
+<body>
+<script>
+function hello(result){
+    alert(JSON.stringify(result));
+}
+</script>
+<script src="http://localhost:8080/jsonp?callback=hello"></script>
+</body>
+</html>
