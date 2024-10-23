@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE with Spring Boot</title>
+</head>
+<body>
+<h1>Receiving Server-Sent Events</h1>
+<div id="messages"></div>
+<script>
+    var eventSource = new EventSource('http://localhost:8080/sse?uid=1');
+    eventSource.onmessage = function(event) {
+        var messages = document.getElementById('messages');
+        var message = document.createElement('div');
+        message.textContent = 'Message from server: ' + event.data;
+        messages.appendChild(message);
+    };
+    eventSource.addEventListener("event1", function(event){
+        var messages = document.getElementById('messages');
+        var message = document.createElement('div');
+        message.textContent = 'Message from server: ' + event.data;
+        messages.appendChild(message);
+    })
+    eventSource.onerror = function(event) {
+        console.error('EventSource failed:', event);
+        eventSource.close();
+    };
+    window.addEventListener('beforeunload', (event) => {
+        eventSource.close();
+    });
+</script>
+</body>
+</html>
