@@ -1,0 +1,23 @@
+syntax = "proto3";
+ 
+option java_multiple_files = true;
+option java_package = "com.github.xjs.grpcapi.clientstream";
+option java_outer_classname = "ProductProto";
+ 
+package product.clientstream;
+ 
+service ProductInfo {
+  rpc getProductBatch (ProductGetBatchRequest) returns (stream Product);
+}
+ 
+message ProductGetBatchRequest {
+  int32 count = 10;
+
+}
+ 
+message Product {
+  string id = 1;
+  string name=2;
+  string description=3;
+  float price=4;
+}

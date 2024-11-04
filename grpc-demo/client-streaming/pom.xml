@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
    
 	<groupId>com.github.xjs</groupId>
-	<artifactId>grpc-demo</artifactId>
+	<artifactId>client-streaming</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
 
