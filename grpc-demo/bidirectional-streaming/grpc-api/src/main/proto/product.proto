@@ -1,0 +1,22 @@
+syntax = "proto3";
+ 
+option java_multiple_files = true;
+option java_package = "com.github.xjs.grpcapi.bidirectionalstream";
+option java_outer_classname = "ProductProto";
+ 
+package product.clientstream;
+ 
+service ProductInfo {
+  rpc saveProductBatch (stream Product) returns (stream ProductSaveResult);
+}
+ 
+message ProductSaveResult {
+  bool success = 1;
+}
+ 
+message Product {
+  string id = 1;
+  string name=2;
+  string description=3;
+  float price=4;
+}

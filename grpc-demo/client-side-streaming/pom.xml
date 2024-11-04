@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
    
 	<groupId>com.github.xjs</groupId>
-	<artifactId>single-request-single-response</artifactId>
+	<artifactId>client-side-streaming</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
 
