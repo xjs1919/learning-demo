@@ -1,0 +1,24 @@
+syntax = "proto3";
+ 
+option java_multiple_files = true;
+option java_package = "com.github.xjs.grpcapi.chatroom";
+option java_outer_classname = "ChatRoomtProto";
+ 
+package product.chatroom;
+ 
+service ChatService {
+  rpc JoinRoom (stream JoinRequest) returns (stream ChatMessage);
+  rpc SendMessage(ChatMessage) returns(Empty);
+}
+ 
+message JoinRequest {
+  string username = 1;
+}
+ 
+message ChatMessage {
+  string username = 1;
+  string message = 2;
+}
+
+message Empty{
+}
