@@ -50,6 +50,5 @@ public class GrpcClient {
         requestObserver.onCompleted();
         // 等待结束
         countDownLatch.await();
-
     }
 }

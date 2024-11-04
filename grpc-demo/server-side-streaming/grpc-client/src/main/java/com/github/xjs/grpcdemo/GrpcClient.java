@@ -23,12 +23,10 @@ public class GrpcClient {
             public void onNext(Product result) {
                 System.out.println("服务端返回：" + result.toString());
             }
-
             @Override
             public void onError(Throwable throwable) {
                 throwable.printStackTrace();
             }
-
             @Override
             public void onCompleted() {
                 System.out.println("服务端响应完成");
