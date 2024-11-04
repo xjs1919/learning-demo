@@ -21,5 +21,6 @@ public class GrpcClient {
         System.out.println("productId.getValue() = " + productId.getValue());
         Product product = stub.getProduct(ProductId.newBuilder().setValue("99999").build());
         System.out.println("product.getName() = " + product.getName());
+        channel.shutdown();
     }
 }
