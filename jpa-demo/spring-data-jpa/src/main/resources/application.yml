@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: jpa
+  datasource:
+    driver-class-name: com.informix.jdbc.IfxDriver
+    url: jdbc:informix-sqli://192.168.200.128:9088/jpa_test:INFORMIXSERVER=ifxserver;user=informix;password=in4mix;
+  jpa:
+    database: informix
+    database-platform: org.hibernate.dialect.Informix10Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
