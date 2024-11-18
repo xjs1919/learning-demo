@@ -2,6 +2,7 @@ package com.github.xjs.dao;
 
 import com.github.xjs.entity.Blog;
 import com.github.xjs.entity.User;
+import org.hibernate.query.criteria.internal.OrderImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,8 +67,7 @@ class UserDaoTest {
         System.out.println(user);
     }
 
-
-    //Hibernate: select user0_.id as id1_2_, user0_.name as name2_2_ from tb_user user0_ left outer join tb_blog blogs1_ on user0_.id=blogs1_.user_id and (blogs1_.id=10) where user0_.id=9 and user0_.name=? and blogs1_.title=?
+    //Hibernate: select distinct user0_.id as id1_2_, user0_.name as name2_2_ from tb_user user0_ left outer join tb_blog blogs1_ on user0_.id=blogs1_.user_id and (blogs1_.title like ?) where user0_.id=9 and user0_.name=? and blogs1_.user_id=9
     //Hibernate: select blogs0_.user_id as user_id4_0_0_, blogs0_.id as id1_0_0_, blogs0_.id as id1_0_1_, blogs0_.content as content2_0_1_, blogs0_.title as title3_0_1_, blogs0_.user_id as user_id4_0_1_ from tb_blog blogs0_ where blogs0_.user_id=?
     @Test
     @Transactional
@@ -82,12 +82,16 @@ class UserDaoTest {
                 // 表关联
                 Join<Blog, User> blogJoin = root.join("blogs", JoinType.LEFT);
                 // 在join上添加额外的关联条件
-                Path<Object> blogIdPath = blogJoin.get("id");
-                Predicate blogIdPredicate = cb.equal(blogIdPath, 10L);
+                Path<Object> blogTitlePath = blogJoin.get("title");
+                Predicate blogIdPredicate = cb.like(blogTitlePath.as(String.class), "%Blog");
                 blogJoin.on(blogIdPredicate);
+                // 去重
+                query.distinct(true);
+                // 排序
+                query.orderBy(new OrderImpl(root.get("id"), false));
                 // 添加blog表上的条件
-                Path<Object> titlePath = blogJoin.get("title");
-                Predicate titlePredicate = cb.equal(titlePath, "First Blog");
+                Path<Object> usrPath = blogJoin.get("usr");
+                Predicate titlePredicate = cb.equal(usrPath, 9L);
                 return cb.and(odPredicate, namePredicate, titlePredicate);
             }
         });
