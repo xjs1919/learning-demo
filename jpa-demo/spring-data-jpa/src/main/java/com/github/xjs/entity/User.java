@@ -19,7 +19,7 @@ public class User {
 
     private String name;
 
-    @OneToMany(mappedBy = "usr", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usr", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Blog> blogs = new ArrayList<>();
 
     @Override
