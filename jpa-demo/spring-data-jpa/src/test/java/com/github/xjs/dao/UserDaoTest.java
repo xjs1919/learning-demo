@@ -67,7 +67,7 @@ class UserDaoTest {
         System.out.println(user);
     }
 
-    //Hibernate: select distinct user0_.id as id1_2_, user0_.name as name2_2_ from tb_user user0_ left outer join tb_blog blogs1_ on user0_.id=blogs1_.user_id and (blogs1_.title like ?) where user0_.id=9 and user0_.name=? and blogs1_.user_id=9
+    //Hibernate: select distinct user0_.id as id1_2_, user0_.name as name2_2_ from tb_user user0_ left outer join tb_blog blogs1_ on user0_.id=blogs1_.user_id and (blogs1_.title like ?) where user0_.id=9 and user0_.name=? and blogs1_.user_id=9 order by user0_.id desc
     //Hibernate: select blogs0_.user_id as user_id4_0_0_, blogs0_.id as id1_0_0_, blogs0_.id as id1_0_1_, blogs0_.content as content2_0_1_, blogs0_.title as title3_0_1_, blogs0_.user_id as user_id4_0_1_ from tb_blog blogs0_ where blogs0_.user_id=?
     @Test
     @Transactional
