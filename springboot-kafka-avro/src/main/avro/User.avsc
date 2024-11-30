@@ -1,0 +1,15 @@
+{
+  "namespace": "com.github.xjs.protocol",
+  "type": "record",
+  "name": "UserRecord",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}
