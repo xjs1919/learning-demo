@@ -65,7 +65,10 @@
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 							<output>${project.basedir}/target/generated-sources/openapi</output>
-							<packageName>com.github.xjs.user</packageName>
+<!--							<packageName>com.github.xjs.user</packageName>-->
+							<apiPackage>com.github.xjs.user</apiPackage>
+							<modelPackage>com.github.xjs.user.model</modelPackage>
+							<invokerPackage>com.github.xjs.user.invoker</invokerPackage>
 							<library>resttemplate</library>
 							<generateModelTests>false</generateModelTests>
 							<generateApiTests>false</generateApiTests>

@@ -1,9 +1,9 @@
 package com.github.xjs.order.controller;
 
 import com.github.xjs.order.dto.OrderDto;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.api.UserControllerApi;
-import org.openapitools.client.model.UserDto;
+import com.github.xjs.user.UserControllerApi;
+import com.github.xjs.user.invoker.ApiClient;
+import com.github.xjs.user.model.UserDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
