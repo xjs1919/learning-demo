@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka服务器地址
+    consumer:
+      group-id: my-group  # 默认的消费者组ID
+      auto-offset-reset: earliest  # 如果没有初始偏移量或偏移量已失效，从最早的消息开始读取
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
