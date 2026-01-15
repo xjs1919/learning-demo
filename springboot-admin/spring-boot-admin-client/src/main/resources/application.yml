@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: client-app
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+      instance:
+        service-url: http://localhost:${server.port}
+        name: ${spring.application.name}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ['*']
+  info:
+    env:
+      enabled: true
