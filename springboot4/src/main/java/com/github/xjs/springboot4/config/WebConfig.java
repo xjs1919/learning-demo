@@ -18,17 +18,18 @@ public class WebConfig implements WebMvcConfigurer {
         //configurer.useRequestHeader("X-API-VERSION");
         //configurer.usePathSegment(1);
         //configurer.useQueryParam("X-API-VERSION");
-        configurer.useVersionResolver(
-                request -> {
-                    String headerVersion = request.getHeader("X-API-VERSION");
-                    if (headerVersion != null && headerVersion.length() > 0) {
-                        return headerVersion;
-                    }
-                    String parameterVersion = request.getParameter("X-API-VERSION");
-                    if (parameterVersion != null && parameterVersion.length() > 0) {
-                        return parameterVersion;
-                    }
-                    return "v1";
-                });
+        configurer.useMediaTypeParameter(MediaType.APPLICATION_JSON, "X-API-VERSION");
+//        configurer.useVersionResolver(
+//                request -> {
+//                    String headerVersion = request.getHeader("X-API-VERSION");
+//                    if (headerVersion != null && headerVersion.length() > 0) {
+//                        return headerVersion;
+//                    }
+//                    String parameterVersion = request.getParameter("X-API-VERSION");
+//                    if (parameterVersion != null && parameterVersion.length() > 0) {
+//                        return parameterVersion;
+//                    }
+//                    return "v1";
+//                });
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 //configurer.usePathSegment(1);
 //@RestController
-@RequestMapping("/api/{version}")
+//@RequestMapping("/api/{version}")
 public class VersionInPathController {
 
     /**

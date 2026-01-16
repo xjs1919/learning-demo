@@ -4,13 +4,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//configurer.useQueryParam("X-API-VERSION");
-//@RestController
-//@RequestMapping("/api")
-public class VersionInQueryController {
+
+@RestController
+@RequestMapping("/api")
+public class VersionInMediaTypeController {
 
     /**
-     * curl 'http://localhost:8080/api/v1/demo?X-API-VERSION=v1'
+     * curl localhost:8080/api/demo -H 'Accept: application/json; X-API-VERSION=v1'
      * */
     @GetMapping(version = "v1", path = "/demo")
     public String v1(){
@@ -18,7 +18,7 @@ public class VersionInQueryController {
     }
 
     /**
-     *  curl 'http://localhost:8080/api/v1/demo?X-API-VERSION=v2'
+     * curl localhost:8080/api/demo -H 'Accept: application/json; X-API-VERSION=v2'
      * */
     @GetMapping(version = "v2", path = "/demo")
     public String v2(){
