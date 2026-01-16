@@ -1,13 +1,12 @@
 package com.github.xjs.springboot4;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 
-@SpringBootTest
 class Springboot4ApplicationTests {
 
-	@Test
-	void contextLoads() {
+	public static void main(String[] args) {
+		MediaType mediaType = MediaType.parseMediaType("application/json");
+		System.out.println(mediaType);
 	}
-
 }

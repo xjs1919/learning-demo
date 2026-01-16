@@ -1,3 +1,9 @@
 spring:
-  application:
-    name: springboot4
+  mvc:
+    apiversion:
+      use:
+#        header: X-API-VERSION
+#        pathSegment: 1
+#        queryParameter: X-API-VERSION
+        mediaTypeParameter:
+          "[application/json]": "X-API-VERSION"

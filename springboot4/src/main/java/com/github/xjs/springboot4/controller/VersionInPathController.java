@@ -3,7 +3,9 @@ package com.github.xjs.springboot4.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-//configurer.usePathSegment(1);
+// configurer.usePathSegment(1);
+// or
+// spring.mvc.apiversion.use.pathSegment=1
 //@RestController
 //@RequestMapping("/api/{version}")
 public class VersionInPathController {

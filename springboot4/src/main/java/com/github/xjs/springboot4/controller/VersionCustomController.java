@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //configurer.useVersionResolver();
 //@RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class VersionCustomController {
 
     /**

@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 // configurer.useRequestHeader("X-API-VERSION");
+// or
+// spring.mvc.apiversion.use.header=X-API-VERSION
 //@RestController
 //@RequestMapping("/api")
 public class VersionInHeaderController {

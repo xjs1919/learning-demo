@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+// configurer.useMediaTypeParameter(MediaType.APPLICATION_JSON, "X-API-VERSION");
+// or
+// spring.mvc.apiversion.use.mediaTypeParameter.application/json=X-API-VERSION
 @RestController
 @RequestMapping("/api")
 public class VersionInMediaTypeController {
