@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 // configurer.useQueryParam("X-API-VERSION");
 // or
 // spring.mvc.apiversion.use.queryParameter=X-API-VERSION
-//@RestController
-//@RequestMapping("/api")
+//SemanticApiVersionParser
 public class VersionInQueryController {
 
     /**
