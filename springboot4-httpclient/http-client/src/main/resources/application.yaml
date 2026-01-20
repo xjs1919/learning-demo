@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  http:
+    serviceclient:
+      goods:
+        base-url: "http://localhost:8082"
+      order:
+        base-url: "http://localhost:8081"
