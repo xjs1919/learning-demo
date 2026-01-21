@@ -6,5 +6,12 @@ spring:
     serviceclient:
       goods:
         base-url: "http://localhost:8082"
+        connect-timeout: 3s
+        read-timeout: 8s
       order:
         base-url: "http://localhost:8081"
+    clients:
+      connect-timeout: 3s
+      read-timeout: 5s
+#      imperative:
+#        factory: http_components
