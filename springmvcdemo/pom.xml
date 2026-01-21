@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.7.RELEASE</spring.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
-		<fastjson.version>1.2.38</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
 		<jedis.version>2.9.0</jedis.version>
 		<mybatis.version>3.3.0</mybatis.version>
