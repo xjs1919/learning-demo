@@ -11,7 +11,7 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.2.7.RELEASE</spring.version>
+		<spring.version>5.2.20.RELEASE</spring.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
 		<fastjson.version>1.2.38</fastjson.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
