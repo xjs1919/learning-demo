@@ -1,8 +1,7 @@
 package com.github.xjs.springboot4.controller;
 
-import com.github.xjs.springboot4.config.BeanRegistrarConfig;
+import com.github.xjs.springboot4.config.EnvBeanRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BeanRegistrarController {
 
     @Autowired
-    private BeanRegistrarConfig.EnvService envService;
+    private EnvBeanRegistrar.EnvService envService;
 
     @GetMapping(path = "/demo")
     public String demo() throws Exception{
