@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'net.ltgt.errorprone' version '5.0.0'//https://github.com/tbroyer/gradle-errorprone-plugin
+}
+
+group = 'com.github.xjs'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	errorprone 'com.google.errorprone:error_prone_core:2.46.0' //https://github.com/google/error-prone
+	errorprone 'com.uber.nullaway:nullaway:0.13.1' //https://github.com/uber/NullAway/
+
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.release = 25
+	options.errorprone{
+		disableAllChecks=true
+		enable("NullAway")
+		option("NullAway:OnlyNullMarked", "true")// only in null-marked code
+		option("NullAway:CustomContractAnnotations", "org.springframework.lang.Contract")
+		error("NullAway") // from warn to error
+		option("NullAway:JSpecifyMode", "true")//https://github.com/uber/NullAway/wiki/JSpecify-Support
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
