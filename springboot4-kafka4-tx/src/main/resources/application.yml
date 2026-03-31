@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: kafka4-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      transaction-id-prefix: tx-
+    consumer:
+      group-id: quick-group
+      properties:
+        isolation.level: read_committed
+  datasource:
+    username: admin
+    password: admin
+    url: jdbc:h2:~/users
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none

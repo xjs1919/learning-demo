@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: kafka4-exception-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      # 最大重试次数，受限于delivery.timeout.ms
+      retries: 10
+      # 生产者要求领导者（leader）在认为请求完成之前已收到的确认数量。
+      #acks=0：生产者将完全不等待服务器的任何确认。消息将立即添加到套接字缓冲区并视为已发送。在这种情况下，无法保证服务器已收到消息，且 retries 配置将不会生效（因为客户端通常无法知道任何失败）。
+      #acks=1：这意味着领导者会将消息写入其本地日志，但无需等待所有跟随者（follower）的完全确认即做出响应。在这种情况下，如果领导者在确认消息之后、跟随者复制消息之前立即发生故障，那么该消息将会丢失。
+      #acks=all：这意味着领导者将等待所有当前处于同步状态（in-sync）的副本确认该消息。此设置等同于 acks=-1。
+      acks: all
+      properties:
+        # 初始退避值，对于每个失败的请求，该值将呈指数级增加，一直到达到retry.backoff.max.ms
+        # 对于这个案例，重试的时间间隔为：1 2 4 5 5 5 .。。。因为最大是5
+        retry.backoff.ms: 1000
+        # 重试请求时的最大等待时间，如果 retry.backoff.ms设置的值高于retry.backoff.max.ms，则retry.backoff.max.ms将从一开始就作为恒定退避时间使用，不会再呈指数级增加
+        retry.backoff.max.ms: 5000
+        # 该参数规定了从 send() 方法返回后，报告发送成功或失败的最长时间上限，
+        # 此上限涵盖记录在发送前的最大延迟时间、等待 Broker 确认的时间（若需要确认），以及可重试发送失败所允许的时间。
+        # 如果遇到不可恢复的错误、重试次数已耗尽，或者记录被添加到的批次已达到了更早的投递到期时限，生产者可能会在此配置值规定的时间之前报告发送失败。
+        # 该配置项的值应大于或等于 request.timeout.ms 与 linger.ms 之和。
+        # 默认是120000
+        delivery.timeout.ms: 30000
+        # 控制客户端等待请求响应的最长时间，默认是30000
+        request.timeout.ms: 10000
+    consumer:
+      group-id: quick-group

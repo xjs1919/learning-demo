@@ -1,0 +1,35 @@
+3个节点伪集群搭建
+
+1）在D:\kafka_2.13-4.1.1主目录下创建3个目录node1、node2、node3
+2）把D:\kafka_2.13-4.1.1\config目录复制到node1、node2、node3之下，同时在node1、node2、node3下面创建data目录
+3）修改node1下的config中的server.properties
+    node.id=1
+    controller.quorum.bootstrap.servers=localhost:9093
+    controller.quorum.voters=1@localhost:9093,2@localhost:9193,3@localhost:9293
+    listeners=PLAINTEXT://:9092,CONTROLLER://:9093
+    advertised.listeners=PLAINTEXT://localhost:9092,CONTROLLER://localhost:9093
+    log.dirs=D:/kafka_2.13-4.1.1/node1/data
+4）修改node2下的config中的server.properties
+     node.id=2
+     controller.quorum.bootstrap.servers=localhost:9193
+     controller.quorum.voters=1@localhost:9093,2@localhost:9193,3@localhost:9293
+     listeners=PLAINTEXT://:9192,CONTROLLER://:9193
+     advertised.listeners=PLAINTEXT://localhost:9192,CONTROLLER://localhost:9193
+     log.dirs=D:/kafka_2.13-4.1.1/node2/data
+5）修改node3下的config中的server.properties
+     node.id=3
+     controller.quorum.bootstrap.servers=localhost:9293
+     controller.quorum.voters=1@localhost:9093,2@localhost:9193,3@localhost:9293
+     listeners=PLAINTEXT://:9292,CONTROLLER://:9293
+     advertised.listeners=PLAINTEXT://localhost:9292,CONTROLLER://localhost:9293
+     log.dirs=D:/kafka_2.13-4.1.1/node3/data
+6）生成集群的id
+    .\bin\windows\kafka-storage random-uuid
+7）使用上一步的id初始化3个节点
+    .\bin\windows\kafka-storage.bat format -t TZfUeHTUQzSn-ygOG5I0ew -c D:\kafka_2.13-4.1.1\node1\config\server.properties
+    .\bin\windows\kafka-storage.bat format -t TZfUeHTUQzSn-ygOG5I0ew -c D:\kafka_2.13-4.1.1\node2\config\server.properties
+    .\bin\windows\kafka-storage.bat format -t TZfUeHTUQzSn-ygOG5I0ew -c D:\kafka_2.13-4.1.1\node3\config\server.properties
+8）启动3个节点
+    .\bin\windows\kafka-server-start.bat D:\kafka_2.13-4.1.1\node1\config\server.properties
+    .\bin\windows\kafka-server-start.bat D:\kafka_2.13-4.1.1\node2\config\server.properties
+    .\bin\windows\kafka-server-start.bat D:\kafka_2.13-4.1.1\node3\config\server.properties

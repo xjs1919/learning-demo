@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: onbservability-service
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # 100% for development
+  otlp:
+    metrics:
+      export:
+        url: http://192.168.137.100:4318/v1/metrics
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: http://192.168.137.100:4318/v1/traces
+    logging:
+      export:
+        otlp:
+          endpoint: http://192.168.137.100:4318/v1/logs

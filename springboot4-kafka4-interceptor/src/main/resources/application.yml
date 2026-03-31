@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: kafka4-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      properties:
+        interceptor.classes: com.github.xjs.kafka.interceptor.SendTraceIdInterceptor
+    consumer:
+      group-id: quick-group
+      properties:
+        interceptor.classes: com.github.xjs.kafka.interceptor.ReceiveTraceIdInterceptor

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: kafka4-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: quick-group
