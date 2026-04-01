@@ -3,10 +3,13 @@ package com.github.xjs.bean.lifecycle;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +17,7 @@ import javax.annotation.PreDestroy;
 
 @Service
 @ImportResource("classpath:com/github/xjs/bean/lifecycle/beans.xml")
-public class UserService implements InitializingBean, DisposableBean, ApplicationContextAware {
+public class UserService implements InitializingBean, DisposableBean, ApplicationContextAware, SmartInitializingSingleton, ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private InjectedService injectedService;
@@ -55,4 +58,13 @@ public class UserService implements InitializingBean, DisposableBean, Applicatio
         System.out.println("destroyMethod");
     }
 
+    @Override
+    public void afterSingletonsInstantiated() {
+        System.out.println("SmartInitializingSingleton.afterSingletonsInstantiated()");
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        System.out.println("ContextRefreshedEvent");
+    }
 }
