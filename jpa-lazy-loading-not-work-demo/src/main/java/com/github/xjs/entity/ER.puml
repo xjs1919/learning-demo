@@ -1,0 +1,16 @@
+@startuml:
+left to right direction
+entity "Author" {
+  * id : BIGINT <<PK>>
+  --
+  name : VARCHAR(255)
+}
+entity "Contact" {
+  * id : BIGINT <<PK>>
+  --
+  mobile : VARCHAR(255)
+  email : VARCHAR(255)
+  author_id : BIGINT <<FK>>
+}
+Author ||--|| Contact : has 1:1
+@enduml
